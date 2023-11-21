@@ -1,14 +1,13 @@
-<script setup>
-import GlassEffect from "~/components/GlassEffect.vue";
-</script>
+<script setup></script>
 
 <template>
-  <NuxtPage />
-  <GlassEffect />
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
 <style>
 #ssi {
-  @apply h-screen w-screen bg-white dark:bg-slate-950;
+  @apply min-h-screen h-full w-screen bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-300;
 }
 </style>
