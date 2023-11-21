@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import MainHeader from "~/components/header/MainHeader.vue";
 import GlassEffect from "~/components/design/GlassEffect.vue";
+import MainHeader from "~/components/header/MainHeader.vue";
 </script>
 
 <template>
   <div>
     <MainHeader />
-    <GlassEffect />
+    <ClientOnly>
+      <GlassEffect />
+    </ClientOnly>
     <slot />
   </div>
 </template>

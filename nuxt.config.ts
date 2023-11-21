@@ -3,9 +3,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   pages: true,
   srcDir: "src",
-  experimental: {
-    componentIslands: true,
-  },
   app: {
     rootId: "ssi",
     rootTag: "main",
