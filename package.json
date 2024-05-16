@@ -1,0 +1,26 @@
+{
+  "name": "9ssi7.dev",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.7.0",
+    "@astrojs/mdx": "^3.0.0",
+    "@astrojs/node": "^8.2.5",
+    "@astrojs/tailwind": "^5.1.0",
+    "aos": "^2.3.4",
+    "astro": "^4.8.4",
+    "autoprefixer": "^10.4.19",
+    "boxicons": "^2.1.4",
+    "dayjs": "^1.11.11",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5"
+  }
+}

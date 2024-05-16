@@ -1,0 +1,86 @@
+---
+import { LocaleCodes } from "@/i18n/ui";
+import { getLangFromHeaders, useI18n } from "@/i18n/utils";
+import "boxicons/css/boxicons.min.css";
+import UserProfileCard from "../partials/user/UserProfileCard.astro";
+
+Astro.request.headers.set("Accept-Language", "en-US,en;q=0.9,tr;q=0.8");
+
+const lang = getLangFromHeaders(Astro.request.headers);
+const { t } = useI18n(lang);
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Sami Salih İbrahimbaş" />
+    <title>Sami Salih İbrahimbaş</title>
+    <meta name="robots" content="index,follow" />
+    <meta property="og:url" content="https://9ssi7.dev/" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:description"
+      content="
+      I am a software and product developer with expertise in Go, JavaScript, and Docker. I am passionate about developing user-centric, innovative, and open-source solutions. I am open to collaboration and learning."
+    />
+    <meta
+      name="description"
+      content="
+    I am a software and product developer with expertise in Go, JavaScript, and Docker. I am passionate about developing user-centric, innovative, and open-source solutions. I am open to collaboration and learning."
+    />
+    <meta property="og:image:alt" content="Sami Salih İbrahimbaş" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:locale" content={LocaleCodes[lang]} />
+    <meta property="og:site_name" content="Sami Salih İbrahimbaş" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:title" content="Sami Salih İbrahimbaş" />
+    <meta property="og:image" content="/cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="600" />
+    <link rel="shortcut icon" href="/shortcut.jpg" />
+  </head>
+  <body
+    class="selection:bg-blue-200 dark:selection:bg-blue-500/5 dark:selection:text-blue-400 selection:text-blue-500 selection:bg-opacity-20 bg-default text-black dark:text-white bg-image bg-no-repeat bg-fixed"
+  >
+    <div class="container mx-auto grid grid-cols-12 gap-4 lg:gap-10 pt-44">
+      <div
+        class="col-span-12 relative lg:col-span-4 lg:h-screen lg:sticky lg:top-44 px-4 md:px-0"
+      >
+        <UserProfileCard />
+      </div>
+      <div class="col-span-12 lg:col-span-8 px-4 md:px-0">
+        <slot />
+      </div>
+    </div>
+    <style>
+      :root {
+        --bg-default: #f8f9fa;
+        --bg-secondary: #ffffff;
+        --bg-third: #f3f6f6;
+        --border-color: #e9ecef;
+        --bg-image-url: url("/1.png");
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-default: #090909;
+          --bg-secondary: #121212;
+          --bg-third: #1d1d1d;
+          --border-color: #2a2a2a;
+          --bg-image-url: url("/2.png");
+        }
+      }
+
+      html {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      .bg-image {
+        background-image: var(--bg-image-url);
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
+  </body>
+</html>
