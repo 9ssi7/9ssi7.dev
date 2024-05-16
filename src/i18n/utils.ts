@@ -59,14 +59,6 @@ export function useTranslatedPath(lang: Locale) {
     const hasTranslation =
       routes[l] !== undefined && routes[l][pathName] !== undefined;
     const translatedPath = hasTranslation ? "/" + routes[l][pathName] : path;
-    console.log(
-      translatedPath,
-      pathName,
-      l,
-      hasTranslation,
-      routes[l][pathName]
-    );
-
     return !showDefaultLang && l === defaultLang
       ? translatedPath
       : `/${l}${translatedPath}`;
