@@ -1,13 +1,10 @@
 ---
 import { LocaleCodes } from "@/i18n/ui";
-import { getLangFromHeaders, useI18n } from "@/i18n/utils";
+import { getLangFromHeaders } from "@/i18n/utils";
 import "boxicons/css/boxicons.min.css";
 import UserProfileCard from "../partials/user/UserProfileCard.astro";
 
-Astro.request.headers.set("Accept-Language", "en-US,en;q=0.9,tr;q=0.8");
-
 const lang = getLangFromHeaders(Astro.request.headers);
-const { t } = useI18n(lang);
 ---
 
 <html lang={lang}>
