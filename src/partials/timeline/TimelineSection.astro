@@ -1,0 +1,134 @@
+---
+import TimelineItems, {
+  TimelineCategoriesAsResponsiveDate,
+  TimelineCategoriesAsStaticDate,
+  TimelineCategoryColors,
+  TimelineCategoryIcons,
+  TimelineTagColors,
+  TimelineTagIcons,
+  type TimelineCategory,
+} from "@/data/timeline";
+import { getLangFromHeaders, useI18n } from "@/i18n/utils";
+
+const locale = getLangFromHeaders(Astro.request.headers);
+const { t, d } = useI18n(locale);
+
+const timelineDateOpts: Intl.DateTimeFormatOptions = {
+  year: "numeric",
+  month: "short",
+};
+
+const getDateByTimelineCategory = (
+  category: TimelineCategory,
+  date: string
+): string => {
+  if (TimelineCategoriesAsResponsiveDate.includes(category)) {
+    const [_, month, year] = d(date, timelineDateOpts).split(" ");
+    return `${month} ${year}`;
+  }
+  return d(date, timelineDateOpts);
+};
+---
+
+<section class="pt-12 md:py-12 px-2 sm:px-5 md:px-10 lg:px-14 animate-fade-in">
+  <h2 class="text-3xl">{t("timeline_title")}</h2>
+  <p class="text-gray-500 dark:text-gray-400 mt-1">
+    {t("timeline_desc")}
+  </p>
+  <div class="relative mt-4 md:mt-7">
+    <div
+      class="absolute top-0 bottom-0 transform left-6 lg:left-8 w-0.5 bg-third"
+    >
+    </div>
+    <div class="relative">
+      {
+        TimelineItems.map((item) => (
+          <div class="timeline-item">
+            <div class={`z-50 rounded-full lg:w-16 lg:h-16 w-12 h-12 bg-third`}>
+              <span
+                class={`lg:w-16 lg:h-16 w-12 h-12 rounded-full flex items-center justify-center bg-opacity-5 ${TimelineCategoryColors[item.category]}`}
+              >
+                <i
+                  class={`bx ${TimelineCategoryIcons[item.category]} text-2xl lg:text-4xl`}
+                />
+              </span>
+            </div>
+            <div class="timeline-content bg-third p-4 rounded-lg shadow-md relative">
+              <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-7">
+                  <h3 class="text-xl font-semibold mb-2">
+                    {item.translation[locale].title}
+                  </h3>
+                </div>
+                <div class="col-span-5 flex justify-end items-start">
+                  <span class="text-xs lg:text-sm text-gray-500 top-4 right-4 min-w-max">
+                    {TimelineCategoriesAsStaticDate.includes(item.category) ? (
+                      <>{getDateByTimelineCategory(item.category, item.date)}</>
+                    ) : (
+                      <>
+                        {getDateByTimelineCategory(item.category, item.date)} -{" "}
+                        {item.endDate
+                          ? getDateByTimelineCategory(
+                              item.category,
+                              item.endDate
+                            )
+                          : t("basics_present")}
+                      </>
+                    )}
+                  </span>
+                </div>
+              </div>
+              {item.translation[locale].subtitle && (
+                <p class="text-gray-600 dark:text-gray-400 mb-2">
+                  {item.translation[locale].subtitle}
+                </p>
+              )}
+              <p class="text-gray-700 dark:text-gray-300">
+                {item.translation[locale].description}
+              </p>
+              {item.tags && (
+                <div class="mt-2 flex flex-wrap gap-2">
+                  {item.tags.map((tag) => (
+                    <span
+                      class={`inline-flex bg-opacity-5 items-center px-2 py-1 select-none rounded-full ${TimelineTagColors[tag]}`}
+                    >
+                      <i class={`bx mr-1 text-lg ${TimelineTagIcons[tag]}`} />
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+              {item.url && (
+                <div class="mt-4">
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-blue-600underline dark:text-blue-400"
+                  >
+                    <i class="bx bx-link-external text-md" />
+                    {t("basics_learn_more")}
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 1fr 8fr;
+    grid-gap: 10px;
+    margin-bottom: 30px;
+  }
+
+  .timeline-content {
+    position: relative;
+    top: 7px;
+  }
+</style>

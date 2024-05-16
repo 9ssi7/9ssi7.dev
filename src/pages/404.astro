@@ -1,0 +1,69 @@
+---
+import Badge from "@/components/Badge.astro";
+import { getLangFromHeaders, useI18n } from "@/i18n/utils";
+
+const locale = getLangFromHeaders(Astro.request.headers);
+const { t } = useI18n(locale);
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body
+    class="min-h-screen h-full flex flex-col selection:bg-blue-200 dark:selection:bg-blue-500/5 dark:selection:text-blue-400 selection:text-blue-500 selection:bg-opacity-20 bg-default text-black dark:text-white"
+  >
+    <main
+      class="min-h-full grow flex w-full h-full items-center justify-center"
+    >
+      <div class="text-center">
+        <p class="text-base font-semibold pb-2">
+          <Badge variant="blue" size="md"> 404 </Badge>
+        </p>
+        <h1
+          class="mt-4 tracking-tight text-3xl font-bold text-gray-900 dark:text-gray-200 sm:text-5xl"
+        >
+          {t("basics_page")}
+          <Badge variant="blue" solid size="extend">
+            {t("basics_not_found")}
+          </Badge>
+        </h1>
+        <p class="mt-6 text-base leading-7 text-gray-600 dark:text-gray-400">
+          {t("basics_not_found_desc")}
+        </p>
+        <div class="mt-10 flex items-center justify-center gap-x-6">
+          <a
+            href={"/"}
+            class="bg-blue-500 text-white py-1.5 px-2.5 text-base rounded transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-opacity-50 disabled:opacity-50"
+          >
+            {t("page_home")}
+          </a>
+        </div>
+      </div>
+    </main>
+    <style>
+      :root {
+        --bg-default: #f8f9fa;
+        --bg-secondary: #ffffff;
+        --bg-third: #f3f6f6;
+        --border-color: #e9ecef;
+        --bg-image-url: url("/1.png");
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-default: #090909;
+          --bg-secondary: #121212;
+          --bg-third: #1d1d1d;
+          --border-color: #2a2a2a;
+          --bg-image-url: url("/2.png");
+        }
+      }
+
+      html {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,125 @@
+---
+import type { Size, Variant } from "./Badge.types";
+
+type SizeMapping = {
+  default: string;
+  pill: string;
+};
+
+type VariantMapping = {
+  default: string;
+  solid: string;
+};
+
+interface Props {
+  variant?: Variant;
+  size?: Size;
+  pill?: boolean;
+  solid?: boolean;
+  className?: string;
+}
+
+const sizes: Record<Size, SizeMapping> = {
+  xs: {
+    default: "px-1.5 py-0.5 text-xs",
+    pill: "px-2 py-1 text-xs",
+  },
+  sm: {
+    default: "px-2 py-1 text-sm",
+    pill: "px-2.5 py-1.5 text-sm",
+  },
+  md: {
+    default: "px-2.5 py-1.5 text-base",
+    pill: "px-3 py-2 text-base",
+  },
+  lg: {
+    default: "px-2 py-2 text-lg",
+    pill: "px-5 py-3 text-lg",
+  },
+  xl: {
+    default: "px-5 py-3 text-xl",
+    pill: "px-6 py-4 text-xl",
+  },
+  "2xl": {
+    default: "px-2 py-2 text-2xl",
+    pill: "px-7 py-5 text-2xl",
+  },
+  "3xl": {
+    default: "px-2 py-2 text-3xl",
+    pill: "px-8 py-6 text-3xl",
+  },
+  extend: {
+    default: "px-2",
+    pill: "px-3",
+  },
+};
+
+const variants: Record<Variant, VariantMapping> = {
+  violet: {
+    default: "bg-violet-500/10 text-violet-500",
+    solid: "bg-violet-500 text-white",
+  },
+  emerald: {
+    default: "bg-emerald-500/10 text-emerald-500",
+    solid: "bg-emerald-500 text-white",
+  },
+  blue: {
+    default: "bg-blue-500/10 text-blue-500",
+    solid: "bg-blue-500 text-white",
+  },
+  red: {
+    default: "bg-red-500/10 text-red-500",
+    solid: "bg-red-500 text-white",
+  },
+  yellow: {
+    default: "bg-yellow-500/10 text-yellow-500",
+    solid: "bg-yellow-500 text-white",
+  },
+  green: {
+    default: "bg-green-500/10 text-green-500",
+    solid: "bg-green-500 text-white",
+  },
+  purple: {
+    default: "bg-purple-500/10 text-purple-500",
+    solid: "bg-purple-500 text-white",
+  },
+  gray: {
+    default: "bg-gray-500/10 text-gray-500",
+    solid: "bg-gray-500 text-white",
+  },
+  orange: {
+    default: "bg-orange-500/10 text-orange-500",
+    solid: "bg-orange-500 text-white",
+  },
+  slate: {
+    default: "bg-slate-200/10 text-slate-500",
+    solid: "bg-slate-200 text-black dark:bg-neutral-800 dark:text-white",
+  },
+  white: {
+    default: "bg-white/10 text-black",
+    solid: "bg-white text-black",
+  },
+  black: {
+    default: "bg-black/10 text-white",
+    solid: "bg-black text-white",
+  },
+  transparent: {
+    default: "bg-transparent hover:bg-violet-500/10 text-black",
+    solid: "bg-transparent hover:bg-violet-500 text-black",
+  },
+};
+
+const { variant = "violet", size = "sm", solid, pill, className } = Astro.props;
+
+const Tag = solid ? "mark" : "span";
+---
+
+<Tag
+  class={`rounded-md transition-colors duration-200 ${
+    pill ? sizes[size].pill : sizes[size].default
+  } ${solid ? variants[variant].solid : variants[variant].default} ${
+    className ? className : ""
+  }`}
+>
+  <slot />
+</Tag>

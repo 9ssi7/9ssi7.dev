@@ -1,0 +1,27 @@
+---
+type Position = "top" | "right" | "bottom" | "left";
+
+interface Props {
+  content: string;
+  class?: string;
+  position?: Position;
+}
+
+const { content, position = "top", class: className } = Astro.props;
+
+const positionClasses: Record<Position, string> = {
+  top: "-top-11 left-1/2 -translate-x-1/2",
+  right: "top-1/2 -right-8 -translate-y-1/2",
+  bottom: "top-full",
+  left: "top-1/2 -left-8 -translate-y-1/2",
+};
+---
+
+<div class={`tooltip-trigger relative group ${className}`}>
+  <slot />
+  <div
+    class={`tooltip min-w-max absolute z-101 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-300 bg-third p-2 rounded-md shadow-md ${positionClasses[position]}`}
+  >
+    {content}
+  </div>
+</div>
