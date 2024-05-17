@@ -38,6 +38,19 @@ type ApiResponse = {
   };
 };
 
+export const emptyApiResponse: ApiResponse = {
+  data: {
+    user: {
+      contributionsCollection: {
+        contributionCalendar: {
+          totalContributions: 0,
+          weeks: [],
+        },
+      },
+    },
+  },
+};
+
 export async function getContributions(userName: string): Promise<ApiResponse> {
   const variables = `
   {
@@ -55,5 +68,6 @@ export async function getContributions(userName: string): Promise<ApiResponse> {
     },
     body: JSON.stringify(body),
   });
+  if (res.status !== 200) throw new Error("Failed to fetch data");
   return res.json();
 }
