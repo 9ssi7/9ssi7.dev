@@ -12,7 +12,6 @@
   "dependencies": {
     "@astrojs/check": "^0.7.0",
     "@astrojs/mdx": "^3.0.0",
-    "@astrojs/node": "^8.2.5",
     "@astrojs/tailwind": "^5.1.0",
     "aos": "^2.3.4",
     "astro": "^4.8.4",
