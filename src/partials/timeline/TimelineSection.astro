@@ -16,6 +16,7 @@ const { t, d } = useI18n(locale);
 const timelineDateOpts: Intl.DateTimeFormatOptions = {
   year: "numeric",
   month: "short",
+  day: undefined,
 };
 
 const getDateByTimelineCategory = (
@@ -23,8 +24,7 @@ const getDateByTimelineCategory = (
   date: string
 ): string => {
   if (TimelineCategoriesAsResponsiveDate.includes(category)) {
-    const [_, month, year] = d(date, timelineDateOpts).split(" ");
-    return `${month} ${year}`;
+    return d(date, timelineDateOpts);
   }
   return d(date, timelineDateOpts);
 };
