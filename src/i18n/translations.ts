@@ -25,6 +25,15 @@ export const en = {
 
   timeline_title: "Timeline",
   timeline_desc: "Here are some highlights from my journey so far.",
+
+  category_work: "Work",
+  category_education: "Education",
+  category_project: "Projects",
+  category_certificate: "Certifications",
+  category_volunteer: "Volunteer",
+  category_publication: "Publications",
+  "category_open-source": "Open Source",
+  category_all: "All",
 };
 
 export const tr = {
@@ -53,6 +62,15 @@ export const tr = {
 
   timeline_title: "Zaman Çizelgesi",
   timeline_desc: "Şimdiye kadar olan yolculuğumdan bazı önemli noktalar.",
+
+  category_work: "İş",
+  category_education: "Eğitim",
+  category_project: "Projeler",
+  category_certificate: "Sertifikalar",
+  category_volunteer: "Gönüllü",
+  category_publication: "Yayınlar",
+  "category_open-source": "Açık Kaynak",
+  category_all: "Hepsi",
 };
 
 export type TranslationKeys = keyof typeof en;

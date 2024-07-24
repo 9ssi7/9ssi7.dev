@@ -1,11 +1,13 @@
 ---
 import TimelineItems, {
+  AllCategories,
   TimelineCategoriesAsResponsiveDate,
   TimelineCategoriesAsStaticDate,
   TimelineCategoryColors,
   TimelineCategoryIcons,
   TimelineTagColors,
   TimelineTagIcons,
+  isTimelineCategory,
   type TimelineCategory,
 } from "@/data/timeline";
 import { getLangFromHeaders, useI18n } from "@/i18n/utils";
@@ -35,6 +37,28 @@ const getDateByTimelineCategory = (
   <p class="text-gray-500 dark:text-gray-400 mt-1">
     {t("timeline_desc")}
   </p>
+  <div class="grid grid-cols-6 lg:grid-cols-8 gap-4 mt-4 md:mt-7">
+    <a
+      class="px-4 py-2 text-sm flex items-center gap-2 lg:text-base rounded-md bg-opacity-10 col-span-3 sm:col-span-2"
+      href="/?category=all"
+      data-filter-category="all"
+    >
+      <i class="bx bx-grid-alt bx-sm"></i>
+      {t("category_all")}
+    </a>
+    {
+      AllCategories.map((category) => (
+        <a
+          class={`px-4 flex items-center gap-2 py-2 text-sm lg:text-base rounded-md bg-opacity-10 col-span-3 sm:col-span-2`}
+          href={`/?category=${category}`}
+          data-filter-category={category}
+        >
+          <i class={`bx bx-sm ${TimelineCategoryIcons[category]}`} />
+          {t(`category_${category}`)}
+        </a>
+      ))
+    }
+  </div>
   <div class="relative mt-4 md:mt-7">
     <div
       class="absolute top-0 bottom-0 transform left-6 lg:left-8 w-0.5 bg-third"
@@ -43,7 +67,7 @@ const getDateByTimelineCategory = (
     <div class="relative">
       {
         TimelineItems.map((item) => (
-          <div class="timeline-item">
+          <div class="timeline-item" data-category={item.category}>
             <div class={`z-50 rounded-full lg:w-16 lg:h-16 w-12 h-12 bg-third`}>
               <span
                 class={`lg:w-16 lg:h-16 w-12 h-12 rounded-full flex items-center justify-center bg-opacity-5 ${TimelineCategoryColors[item.category]}`}
@@ -118,6 +142,35 @@ const getDateByTimelineCategory = (
     </div>
   </div>
 </section>
+
+<script>
+  import { isTimelineCategory, TimelineCategoryColors } from "@/data/timeline";
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const url = new URL(window.location.href);
+    const category = url.searchParams.get("category");
+    const currentCategory = isTimelineCategory(category) ? category : "all";
+
+    const timelineItems = document.querySelectorAll(".timeline-item");
+    if (currentCategory != "all") {
+      timelineItems.forEach((item: any) => {
+        if (item.getAttribute("data-category") !== currentCategory) {
+          item.style.display = "none";
+        }
+      });
+      const currentEl = document.querySelector(
+        `[data-filter-category=${currentCategory}]`
+      );
+      currentEl?.classList.add(
+        ...TimelineCategoryColors[currentCategory].split(" ")
+      );
+    } else {
+      document
+        .querySelector(`[data-filter-category=all]`)
+        ?.classList.add("bg-blue-500", "text-white");
+    }
+  });
+</script>
 
 <style>
   .timeline-item {

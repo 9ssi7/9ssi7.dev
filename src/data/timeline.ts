@@ -2,11 +2,11 @@ import type { Translation } from "@/i18n/types";
 
 export type TimelineCategory =
   | "work"
-  | "education"
   | "project"
   | "certificate"
   | "volunteer"
-  | "publication";
+  | "publication"
+  | "open-source";
 
 type TimelineTag =
   | "node"
@@ -36,11 +36,11 @@ export type Timeline = {
 
 export const TimelineCategoryIcons: Record<TimelineCategory, string> = {
   work: "bx-buildings",
-  education: "bx-graduation",
   project: "bx-code",
   certificate: "bx-award",
   volunteer: "bx-group",
   publication: "bx-book",
+  "open-source": "bx-git-branch",
 };
 
 export const TimelineTagIcons: Record<TimelineTag, string> = {
@@ -57,11 +57,11 @@ export const TimelineTagIcons: Record<TimelineTag, string> = {
 
 export const TimelineCategoryColors: Record<TimelineCategory, string> = {
   work: "bg-blue-500 text-blue-500",
-  education: "bg-green-500 text-green-500",
   project: "bg-yellow-500 text-yellow-500",
   certificate: "bg-purple-500 text-purple-500",
   volunteer: "bg-red-500 text-red-500",
   publication: "bg-pink-500 text-pink-500",
+  "open-source": "bg-blue-500 text-blue-500",
 };
 
 export const TimelineTagColors: Record<TimelineTag, string> = {
@@ -84,24 +84,84 @@ export const TimelineCategoriesAsStaticDate: TimelineCategory[] = [
 
 const TimelineItems: Timeline[] = [
   {
-    date: "2024-04-01",
-    category: "work",
+    date: "2024-07-21",
+    category: "publication",
     translation: {
       tr: {
-        title: "Kendi İşim",
-        subtitle: "RotaDigitale",
+        title: "Golang'da Gömülü Olarak Go Modüllerini Paylaşma",
+        subtitle: "Medium",
         description:
-          "RotaDigitale adlı şahıs şirketimi kurdum. Bu süreçte yazılım geliştirme ve danışmanlık hizmetleri sunmaktayım.",
+          "Golang'da birden fazla Go modülünü tek bir depoda nasıl yönetebileceğinizi anlatan bir makale.",
       },
       en: {
-        title: "My Own Business",
-        subtitle: "RotaDigitale",
+        title: "Sharing Go Modules as Nested",
+        subtitle: "Medium",
         description:
-          "I founded my sole proprietorship named RotaDigitale. I provide software development and consulting services in this process.",
+          "An article explaining how to manage multiple Go modules in a single repository.",
       },
     },
-    tags: ["node", "react", "golang", "typescript", "docker"],
-    url: "https://rotadigitale.com",
+    tags: ["golang", "postgres"],
+    url: "https://9ssi7.medium.com/sharing-go-modules-as-nested-ad64e608b681",
+  },
+  {
+    date: "2024-07-01",
+    category: "open-source",
+    translation: {
+      tr: {
+        title: "gopre: Modern Mimariler için Go Proje Şablonu",
+        subtitle: "Halka Açık Şablon",
+        description:
+          "düşünülmüş, standartlar uygulanmış, modern ve kabul edilebilir bir başlangıç noktası",
+      },
+      en: {
+        title: "gopre: A Go Project Template for Modern Architectures",
+        subtitle: "Public Template",
+        description:
+          "a well thought out, standards applied, modern and acceptable starting point",
+      },
+    },
+    tags: ["golang", "postgres", "mongodb", "kubernetes", "docker"],
+    url: "https://github.com/9ssi7/gopre",
+  },
+  {
+    date: "2024-07-01",
+    category: "open-source",
+    translation: {
+      tr: {
+        title: "txn: Dağıtık İşlemler için Genel Kütüphane",
+        subtitle: "Açık Kaynak Kütüphane",
+        description:
+          "İş mantığını depolara indirgemeden modern mimarilerde veritabanı bağımsızlığı ve veri tutarlılığı sağlamayı amaçlayan bir arayüz.",
+      },
+      en: {
+        title: "txn: Generic Distributed Transaction Management for Go",
+        subtitle: "Open Source Library",
+        description:
+          "An interface that aims to provide database independence and data consistency in modern architectures without reducing business logic to repositories.",
+      },
+    },
+    tags: ["golang", "postgres", "mongodb"],
+    url: "https://github.com/9ssi7/txn",
+  },
+  {
+    date: "2024-06-03",
+    category: "publication",
+    translation: {
+      tr: {
+        title: "PostgreSQL'de JSONB ile I18n Yönetimi",
+        subtitle: "Medium",
+        description:
+          "Golang'da i18n yönetmek için PostgreSQL'in JSONB veri tipini nasıl kullanabileceğinizi anlatan bir makale.",
+      },
+      en: {
+        title: "Mastering I18n in Golang with PostgreSQL’s JSONB",
+        subtitle: "Medium",
+        description:
+          "An article explaining how to use PostgreSQL's JSONB data type to manage i18n in Golang.",
+      },
+    },
+    tags: ["golang", "postgres"],
+    url: "https://9ssi7.medium.com/mastering-i18n-in-golang-with-postgresqls-jsonb-2631ad50376a",
   },
   {
     date: "2023-12-19",
@@ -183,26 +243,6 @@ const TimelineItems: Timeline[] = [
     url: "https://medium.com/goturkiye/harder-better-faster-stronger-dockerfile-7f5f5abd8c2f",
   },
   {
-    date: "2023-10-01",
-    category: "project",
-    translation: {
-      tr: {
-        title: "Geliştirici",
-        subtitle: "Cillop Architecture",
-        description:
-          "Cillop mimari projesini hayata geçirdim. Bu proje ile yazılım mimarileri hakkında bilgi paylaşımı yapmayı ve yazılım mimarileri hakkında fikir alışverişi yapmayı amaçladık.",
-      },
-      en: {
-        title: "Developer",
-        subtitle: "Cillop Architecture",
-        description:
-          "I launched the Cillop architecture project. With this project, we aimed to share information about software architectures and exchange ideas about software architectures.",
-      },
-    },
-    tags: ["golang"],
-    url: "https://docs.cillop.dev",
-  },
-  {
     date: "2023-08-01",
     translation: {
       tr: {
@@ -266,13 +306,13 @@ const TimelineItems: Timeline[] = [
     category: "project",
     translation: {
       tr: {
-        title: "Kendi İşim",
+        title: "Geliştirici",
         subtitle: "Turistikrota",
         description:
           "Turistikrota projesini hayata geçirdim. Bu proje ile Türkiye'nin turistik bölgelerini ve rotalarını keşfetme fırsatı sunarak çevrimiçi rezervasyon sistemi sunmayı amaçladık.",
       },
       en: {
-        title: "My Own Business",
+        title: "Developer",
         subtitle: "Turistikrota",
         description:
           "I launched the Turistikrota project. With this project, we aimed to provide an online reservation system by offering the opportunity to explore Turkey's touristic regions and routes.",
@@ -345,5 +385,28 @@ const TimelineItems: Timeline[] = [
     url: "https://www.alfatekyazilim.com.tr",
   },
 ];
+
+export const AllCategories: TimelineCategory[] = [
+  "work",
+  "project",
+  "certificate",
+  "volunteer",
+  "publication",
+  "open-source",
+] as const;
+
+export function isTimelineCategory(
+  category: string | null
+): category is TimelineCategory {
+  if (category === null) return false;
+  return [
+    "work",
+    "project",
+    "certificate",
+    "volunteer",
+    "publication",
+    "open-source",
+  ].includes(category);
+}
 
 export default TimelineItems;
