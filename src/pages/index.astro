@@ -1,6 +1,5 @@
 ---
 import { getLangFromHeaders, useI18n } from "@/i18n/utils";
-import GitHubActivityGraphSection from "@/partials/github/GitHubActivityGraphSection.astro";
 import AboutMeSection from "@/partials/home/AboutMeSection.astro";
 import TimelineSection from "@/partials/timeline/TimelineSection.astro";
 import BaseLayout from "../layouts/base.astro";
@@ -14,7 +13,7 @@ const year = currentYear === 2024 ? "2024" : `2024 - ${currentYear}`;
 <BaseLayout>
   <div class="rounded-2xl bg-secondary border border-default">
     <AboutMeSection />
-    <GitHubActivityGraphSection />
+    <!-- <GitHubActivityGraphSection />  -->
     <TimelineSection />
 
     <footer class="overflow-hidden rounded-b-2xl bg-third">
