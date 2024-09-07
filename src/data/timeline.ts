@@ -83,6 +83,47 @@ export const TimelineCategoriesAsStaticDate: TimelineCategory[] = [
 ];
 
 const TimelineItems: Timeline[] = [
+
+  {
+    date: "2024-08-30",
+    category: "project",
+    translation: {
+      tr: {
+        title: "Katkıda Bulunan",
+        subtitle: "NomadWork",
+        description:
+          "Nomadwork uygulamasına backend tarafında katkıda bulundum. Bu süreçte Golang, Postgres ve Docker teknolojileri ile çalıştım.",
+      },
+      en: {
+        title: "Contributor",
+        subtitle: "Nomadwork",
+        description:
+          "I contributed to the Nomadwork application on the backend side. During this process, I worked with Golang, Postgres and Docker technologies.",
+      },
+    },
+    tags: ["golang", "postgres", "docker"],
+    url: "https://nomadwork.app",
+  },
+  {
+    date: "2024-08-31",
+    category: "publication",
+    translation: {
+      tr: {
+        title: "Go'nun Ondalık Dilemması: decimal vs Standart Kütüphane Karşılaştırması",
+        subtitle: "Medium",
+        description:
+          "Go'da decimal paketini standart kütüphanenin decimal uygulaması ile karşılaştıran bir makale.",
+      },
+      en: {
+        title: "Go’s Decimal Dilemma: decimal vs Standard Library Showdown",
+        subtitle: "Medium",
+        description:
+          "An article comparing the decimal package with the standard library's decimal implementation in Go.",
+      },
+    },
+    tags: ["golang"],
+    url: "https://9ssi7.medium.com/gos-decimal-dilemma-decimal-vs-standard-library-showdown-465f30ebab79",
+  },
   {
     date: "2024-07-21",
     category: "publication",

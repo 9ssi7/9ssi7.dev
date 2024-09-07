@@ -37,7 +37,7 @@ const ProfileItems: Item[] = [
   },
   {
     icon: "bxl-twitter text-blue-400 dark:text-blue-500",
-    url: "https://twitter.com/9ssi7",
+    url: "https://x.com/9ssi7",
     appName: "Twitter",
     param: "/ 9ssi7",
   },
