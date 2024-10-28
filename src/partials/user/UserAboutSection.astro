@@ -1,0 +1,62 @@
+---
+import { getLangFromHeaders, useI18n } from "@/i18n/utils";
+
+const { t, tv } = useI18n(getLangFromHeaders(Astro.request.headers));
+---
+
+<section class="mt-8">
+  {
+    tv("about_me_pragraphs").map((p) => (
+      <p class="text-sm text-gray-600 dark:text-neutral-400 leading-6">{p}</p>
+    ))
+  }
+
+  <ul class="mt-5 flex flex-col gap-y-3">
+    <li class="flex items-center gap-x-2.5">
+      <svg
+        class="shrink-0 size-3.5"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+      </svg>
+      <a
+        class="text-[13px] text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-none focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400"
+        href="mailto:contact@9ssi7.dev"
+        target="_blank"
+      >
+        contact@9ssi7.dev
+      </a>
+    </li>
+
+    <li class="flex items-center gap-x-2.5">
+      <svg
+        class="shrink-0 size-3.5"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M14.1881 10.1624L22.7504 0H20.7214L13.2868 8.82385L7.34878 0H0.5L9.47944 13.3432L0.5 24H2.5291L10.3802 14.6817L16.6512 24H23.5L14.1881 10.1624ZM11.409 13.4608L3.26021 1.55962H6.37679L20.7224 22.5113H17.6058L11.409 13.4613V13.4608Z"
+          fill="currentColor"></path>
+      </svg>
+      <a
+        class="text-[13px] text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-none focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400"
+        href="https://x.com/9ssi7"
+        target="_blank"
+      >
+        @9ssi7
+      </a>
+    </li>
+  </ul>
+</section>

@@ -1,0 +1,20 @@
+---
+import { getLangFromHeaders, useI18n } from "@/i18n/utils";
+
+const { t } = useI18n(getLangFromHeaders(Astro.request.headers));
+---
+
+<div class="flex items-center gap-x-3">
+  <div class="shrink-0">
+    <img class="shrink-0 size-16 rounded-full" src="/profile.webp" alt="Avatar">
+  </div>
+
+  <div class="grow">
+    <h1 class="text-lg font-medium text-gray-800 dark:text-neutral-200">
+      Sami Salih İbrahimbaş
+    </h1>
+    <p class="text-sm text-gray-600 dark:text-neutral-400">
+      {t("product_developer")}
+    </p>
+  </div>
+</div>

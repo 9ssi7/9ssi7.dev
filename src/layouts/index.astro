@@ -2,7 +2,8 @@
 import { LocaleCodes } from "@/i18n/ui";
 import { getLangFromHeaders } from "@/i18n/utils";
 import "boxicons/css/boxicons.min.css";
-import UserProfileCard from "../partials/user/UserProfileCard.astro";
+import Footer from "./footer.astro";
+import Header from "./header.astro";
 
 const lang = getLangFromHeaders(Astro.request.headers);
 ---
@@ -38,25 +39,20 @@ const lang = getLangFromHeaders(Astro.request.headers);
     <link rel="shortcut icon" href="/shortcut.jpg" />
   </head>
   <body
-    class="selection:bg-blue-200 dark:selection:bg-blue-500/5 dark:selection:text-blue-400 selection:text-blue-500 selection:bg-opacity-20 bg-default text-black dark:text-white bg-image bg-no-repeat bg-fixed"
+    class="selection:bg-blue-200 dark:selection:bg-blue-500/5 dark:selection:text-blue-400 selection:text-blue-500 selection:bg-opacity-20 bg-default text-black dark:text-white"
   >
-    <div class="container mx-auto grid grid-cols-12 gap-4 lg:gap-10 pt-44">
-      <div
-        class="col-span-12 relative lg:col-span-4 lg:h-screen lg:sticky lg:top-44 px-4 md:px-0"
-      >
-        <UserProfileCard />
-      </div>
-      <div class="col-span-12 lg:col-span-8 px-4 md:px-0">
-        <slot />
-      </div>
-    </div>
+  <Header />
+  <main class="w-full max-w-2xl mx-auto pt-10">
+    <slot />
+  </main>
+  <Footer />
+
     <style>
       :root {
         --bg-default: #f8f9fa;
         --bg-secondary: #ffffff;
         --bg-third: #f3f6f6;
         --border-color: #e9ecef;
-        --bg-image-url: url("/light.webp");
       }
 
       @media (prefers-color-scheme: dark) {
@@ -65,18 +61,11 @@ const lang = getLangFromHeaders(Astro.request.headers);
           --bg-secondary: #121212;
           --bg-third: #1d1d1d;
           --border-color: #2a2a2a;
-          --bg-image-url: url("/dark.webp");
         }
       }
 
       html {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      }
-
-      .bg-image {
-        background-image: var(--bg-image-url);
-        background-size: cover;
-        background-position: center;
+        font-family: "Lexend", sans-serif;
       }
     </style>
   </body>

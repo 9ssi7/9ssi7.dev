@@ -1,28 +1,12 @@
 ---
-import { getLangFromHeaders, useI18n } from "@/i18n/utils";
-import AboutMeSection from "@/partials/home/AboutMeSection.astro";
 import TimelineSection from "@/partials/timeline/TimelineSection.astro";
-import BaseLayout from "../layouts/base.astro";
-
-const { t, tv } = useI18n(getLangFromHeaders(Astro.request.headers));
-
-const currentYear = new Date().getFullYear();
-const year = currentYear === 2024 ? "2024" : `2024 - ${currentYear}`;
+import Layout from "../layouts/index.astro";
+import UserProfileSection from "@/partials/user/UserProfileSection.astro";
+import UserAboutSection from "@/partials/user/UserAboutSection.astro";
 ---
 
-<BaseLayout>
-  <div class="rounded-2xl bg-secondary border border-default">
-    <AboutMeSection />
-    <!-- <GitHubActivityGraphSection />  -->
-    <TimelineSection />
-
-    <footer class="overflow-hidden rounded-b-2xl bg-third">
-      <div class="container">
-        <p class="text-center py-6 text-gray-lite dark:text-color-910">
-          © {year} Sami Salih İbrahimbaş.
-        </p>
-      </div>
-    </footer>
-  </div>
-  <div class="pb-12"></div>
-</BaseLayout>
+<Layout>
+  <UserProfileSection />
+  <UserAboutSection />
+  <TimelineSection class="mt-10" />
+</Layout>

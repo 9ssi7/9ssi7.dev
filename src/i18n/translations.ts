@@ -34,6 +34,11 @@ export const en = {
   category_publication: "Publications",
   "category_open-source": "Open Source",
   category_all: "All",
+
+  header_about: "About",
+  header_projects: "Projects",
+  header_work: "Work",
+  header_blog: "Blog",
 };
 
 export const tr = {
@@ -71,6 +76,11 @@ export const tr = {
   category_publication: "Yayınlar",
   "category_open-source": "Açık Kaynak",
   category_all: "Hepsi",
+
+  header_about: "Hakkımda",
+  header_projects: "Projeler",
+  header_work: "Deneyim",
+  header_blog: "Blog",
 };
 
 export type TranslationKeys = keyof typeof en;

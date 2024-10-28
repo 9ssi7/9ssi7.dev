@@ -1,0 +1,58 @@
+---
+type SocialMedia = {
+  name: string;
+  url: string;
+};
+
+const socialMedia: SocialMedia[] = [
+  {
+    name: "X",
+    url: "https://x.com/9ssi7",
+  },
+  {
+    name: "Medium",
+    url: "https://9ssi7.medium.com",
+  },
+  {
+    name: "YouTube",
+    url: "https://youtube.com/@9ssi7",
+  },
+  {
+    name: "LinkedIn",
+    url: "https://linkedin.com/in/9ssi7",
+  },
+  {
+    name: "Github",
+    url: "https://github.com/9ssi7",
+  },
+];
+
+const currentYear = new Date().getFullYear();
+const startYear = 2024;
+const year = currentYear === startYear ? startYear.toString() : `${startYear} - ${currentYear}`;
+---
+
+<footer class="w-full max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="py-6 border-t border-gray-200 dark:border-neutral-700">
+    <div class="flex flex-wrap justify-between items-center gap-2">
+      <div>
+        <p class="text-xs text-gray-600 dark:text-neutral-400">© {year}</p>
+      </div>
+      <ul class="flex flex-wrap items-center">
+        {
+          socialMedia.map((media) => (
+            <li class="inline-block relative pe-4 text-xs last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-1.5 before:-translate-y-1/2 before:size-[3px] before:rounded-full before:bg-gray-400 dark:text-neutral-500 dark:before:bg-neutral-600">
+              <a
+                class="text-xs text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-none focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400"
+                href={media.url}
+                target="_blank"
+              >
+                {media.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</footer>

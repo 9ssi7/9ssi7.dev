@@ -1,0 +1,104 @@
+---
+import ProfileItems from "@/data/profile";
+import type { TranslationKeys } from "@/i18n/translations";
+import { getLangFromHeaders, useI18n } from "@/i18n/utils";
+
+const { t } = useI18n(getLangFromHeaders(Astro.request.headers));
+
+
+
+---
+
+<header
+  class="sticky top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full text-sm"
+>
+  <nav
+    class="mt-4 relative max-w-2xl w-full bg-white border border-gray-200 rounded-[2rem] mx-2 py-2.5 md:flex md:items-center md:justify-between md:py-0 md:px-4 md:mx-auto dark:bg-neutral-900 dark:border-neutral-700"
+  >
+    <div class="px-4 md:px-0 py-0 md:py-2 flex justify-between items-center w-full">
+ 
+      <a href="/" class="flex items-center gap-2">
+        <img class="w-8 h-8 rounded-full" src="/profile.webp" alt="9ssi7" />
+        <span
+          class="font-semibold text-base text-gray-800 dark:text-neutral-200"
+          >9ssi7</span
+        >
+      </a>
+
+      <div class="min-w-max flex gap-0.5">
+
+        {ProfileItems.map(item =>  <a
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rounded-md flex items-center justify-center transition-colors duration-200 hover:bg-default text-gray-800 dark:text-neutral-200 text-sm cursor-pointer p-2"
+        >
+          <i class={`bx text-base ${item.icon}`} />
+        </a>)}
+       
+      </div>
+      
+    </div>
+  </nav>
+</header>
+
+<script>
+  const navigationClassList = ["border-gray-800", "dark:border-neutral-200"];
+
+  const handleUserNavigator = () => {
+    const navlinks = document.querySelectorAll(".navlink");
+    navlinks.forEach((navlink) => {
+      navlink.addEventListener("click", function () {
+        navlinks.forEach((navlink) => {
+          navlink.classList.remove(...navigationClassList);
+        });
+        navlink.classList.add(...navigationClassList);
+      });
+    });
+  };
+
+  const handleAlreadySelectedTag = () => {
+    const url = new URL(window.location.href);
+    const currentTag = url.hash.slice(1);
+    let useFirstTag = true;
+    if (currentTag) {
+      const currentTagNavLink = document.querySelector(
+        `#navlink-${currentTag}`
+      );
+      if (currentTagNavLink) {
+        currentTagNavLink.classList.add(...navigationClassList);
+        useFirstTag = false;
+      }
+    }
+    if (useFirstTag) {
+      const firstTagNavLink = document.querySelector(`#navlink-about`);
+      if (firstTagNavLink) {
+        firstTagNavLink.classList.add(...navigationClassList);
+      }
+    }
+  };
+
+  const handleCollapse = () => {
+    const button = document.querySelector(
+      "#hs-navbar-header-floating-collapse"
+    );
+    const collapse = document.querySelector("#hs-navbar-header-floating");
+
+    button?.addEventListener("click", function () {
+      collapse!.classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", function (e) {
+      // @ts-ignore
+      if (!collapse!.contains(e.target) && !button!.contains(e.target)) {
+        collapse!.classList.add("hidden");
+      }
+    });
+  };
+
+  document.addEventListener("DOMContentLoaded", function () {
+    handleUserNavigator();
+    handleAlreadySelectedTag();
+    handleCollapse();
+  });
+</script>

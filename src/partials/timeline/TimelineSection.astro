@@ -12,6 +12,12 @@ import TimelineItems, {
 } from "@/data/timeline";
 import { getLangFromHeaders, useI18n } from "@/i18n/utils";
 
+type Props = {
+  class?: string;
+};
+
+const { class: className } = Astro.props;
+
 const locale = getLangFromHeaders(Astro.request.headers);
 const { t, d } = useI18n(locale);
 
@@ -32,28 +38,26 @@ const getDateByTimelineCategory = (
 };
 ---
 
-<section class="pt-12 md:py-12 px-2 sm:px-5 md:px-10 lg:px-14 animate-fade-in">
-  <h2 class="text-3xl">{t("timeline_title")}</h2>
-  <p class="text-gray-500 dark:text-gray-400 mt-1">
-    {t("timeline_desc")}
-  </p>
-  <div class="grid grid-cols-6 lg:grid-cols-8 gap-4 mt-4 md:mt-7">
+<section class={`animate-fade-in ${className ? className : ""}`}>
+  <h2 class="mb-5 font-medium text-gray-800 dark:text-neutral-200">{t("timeline_title")}</h2>
+
+  <div class="flex flex-wrap gap-4">
     <a
-      class="px-4 py-2 text-sm flex items-center gap-2 lg:text-base rounded-md bg-opacity-10 col-span-3 sm:col-span-2"
+      class="px-3 py-2 text-sm flex items-center gap-2 rounded-md bg-opacity-10 min-w-max"
       href="/?category=all"
       data-filter-category="all"
     >
-      <i class="bx bx-grid-alt bx-sm"></i>
+      <i class="bx bx-grid-alt bx-xs"></i>
       {t("category_all")}
     </a>
     {
       AllCategories.map((category) => (
         <a
-          class={`px-4 flex items-center gap-2 py-2 text-sm lg:text-base rounded-md bg-opacity-10 col-span-3 sm:col-span-2`}
+          class={`px-3 flex items-center gap-2 py-2 text-sm rounded-md bg-opacity-10 col-span-3 sm:col-span-2 hover:bg-blue-500 hover:bg-opacity-30 transition-colors duration-200`}
           href={`/?category=${category}`}
           data-filter-category={category}
         >
-          <i class={`bx bx-sm ${TimelineCategoryIcons[category]}`} />
+          <i class={`bx bx-xs ${TimelineCategoryIcons[category]}`} />
           {t(`category_${category}`)}
         </a>
       ))
@@ -61,31 +65,26 @@ const getDateByTimelineCategory = (
   </div>
   <div class="relative mt-4 md:mt-7">
     <div
-      class="absolute top-0 bottom-0 transform left-6 lg:left-8 w-0.5 bg-third"
+      class="absolute top-0 bottom-0 transform left-5 w-0.5 bg-third"
     >
     </div>
     <div class="relative">
       {
         TimelineItems.map((item) => (
-          <div class="timeline-item" data-category={item.category}>
-            <div class={`z-50 rounded-full lg:w-16 lg:h-16 w-12 h-12 bg-third`}>
+          <div class="timeline-item grid grid-cols-12 mb-10" data-category={item.category}>
+            <div class={`z-10 rounded-full w-10 h-10 bg-third col-span-1`}>
               <span
-                class={`lg:w-16 lg:h-16 w-12 h-12 rounded-full flex items-center justify-center bg-opacity-5 ${TimelineCategoryColors[item.category]}`}
+                class={`w-10 h-10 rounded-full flex items-center justify-center bg-opacity-5 ${TimelineCategoryColors[item.category]}`}
               >
                 <i
-                  class={`bx ${TimelineCategoryIcons[item.category]} text-2xl lg:text-4xl`}
+                  class={`bx ${TimelineCategoryIcons[item.category]} text-lg`}
                 />
               </span>
             </div>
-            <div class="timeline-content bg-third p-4 rounded-lg shadow-md relative">
+            <div class="timeline-content relative col-span-11">
               <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-7">
-                  <h3 class="text-xl font-semibold mb-2">
-                    {item.translation[locale].title}
-                  </h3>
-                </div>
-                <div class="col-span-5 flex justify-end items-start">
-                  <span class="text-xs lg:text-sm text-gray-500 top-4 right-4 min-w-max">
+                <div class="col-span-12">
+                  <h3 class="mb-1 text-xs text-gray-600 dark:text-neutral-400">
                     {TimelineCategoriesAsStaticDate.includes(item.category) ? (
                       <>{getDateByTimelineCategory(item.category, item.date)}</>
                     ) : (
@@ -99,22 +98,26 @@ const getDateByTimelineCategory = (
                           : t("basics_present")}
                       </>
                     )}
-                  </span>
+              </h3>
+                  <p class="font-semibold text-sm text-gray-800 dark:text-neutral-200">
+                    {item.translation[locale].title}
+                  </p>
                 </div>
               </div>
               {item.translation[locale].subtitle && (
-                <p class="text-gray-600 dark:text-gray-400 mb-2">
+                <p class="mb-1 text-xs text-gray-600 dark:text-neutral-400">
                   {item.translation[locale].subtitle}
                 </p>
               )}
-              <p class="text-gray-700 dark:text-gray-300">
-                {item.translation[locale].description}
+            <p class="mt-1 text-sm text-gray-600 dark:text-neutral-400">
+              {item.translation[locale].description}
               </p>
+
               {item.tags && (
                 <div class="mt-2 flex flex-wrap gap-2">
                   {item.tags.map((tag) => (
                     <span
-                      class={`inline-flex bg-opacity-5 items-center px-2 py-1 select-none rounded-full ${TimelineTagColors[tag]}`}
+                      class={`inline-flex text-sm bg-opacity-5 items-center px-2 py-1 select-none rounded-full ${TimelineTagColors[tag]}`}
                     >
                       <i class={`bx mr-1 text-lg ${TimelineTagIcons[tag]}`} />
                       {tag}
@@ -123,14 +126,14 @@ const getDateByTimelineCategory = (
                 </div>
               )}
               {item.url && (
-                <div class="mt-4">
+                <div class="mt-2">
                   <a
                     href={item.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-blue-600underline dark:text-blue-400"
+                    class="flex items-center gap-1 text-blue-600 dark:text-blue-400 text-sm"
                   >
-                    <i class="bx bx-link-external text-md" />
+                    <i class="bx bx-link-external text-lg" />
                     {t("basics_learn_more")}
                   </a>
                 </div>
@@ -172,16 +175,3 @@ const getDateByTimelineCategory = (
   });
 </script>
 
-<style>
-  .timeline-item {
-    display: grid;
-    grid-template-columns: 1fr 8fr;
-    grid-gap: 10px;
-    margin-bottom: 30px;
-  }
-
-  .timeline-content {
-    position: relative;
-    top: 7px;
-  }
-</style>
