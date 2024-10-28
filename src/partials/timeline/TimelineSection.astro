@@ -41,7 +41,7 @@ const getDateByTimelineCategory = (
 <section class={`animate-fade-in ${className ? className : ""}`}>
   <h2 class="mb-5 font-medium text-gray-800 dark:text-neutral-200">{t("timeline_title")}</h2>
 
-  <div class="flex flex-wrap gap-4">
+  <div class="grid grid-cols-2 md:flex md:flex-wrap gap-4">
     <a
       class="px-3 py-2 text-sm flex items-center gap-2 rounded-md bg-opacity-10 min-w-max"
       href="/?category=all"
@@ -53,7 +53,7 @@ const getDateByTimelineCategory = (
     {
       AllCategories.map((category) => (
         <a
-          class={`px-3 flex items-center gap-2 py-2 text-sm rounded-md bg-opacity-10 col-span-3 sm:col-span-2 hover:bg-blue-500 hover:bg-opacity-30 transition-colors duration-200`}
+          class={`px-3 flex items-center gap-2 py-2 text-sm rounded-md bg-opacity-10 col-span-1 hover:bg-blue-500 hover:bg-opacity-30 transition-colors duration-200`}
           href={`/?category=${category}`}
           data-filter-category={category}
         >
@@ -72,7 +72,7 @@ const getDateByTimelineCategory = (
       {
         TimelineItems.map((item) => (
           <div class="timeline-item grid grid-cols-12 mb-10" data-category={item.category}>
-            <div class={`z-10 rounded-full w-10 h-10 bg-third col-span-1`}>
+            <div class={`z-10 rounded-full w-10 h-10 bg-third col-span-2 md:col-span-1`}>
               <span
                 class={`w-10 h-10 rounded-full flex items-center justify-center bg-opacity-5 ${TimelineCategoryColors[item.category]}`}
               >
@@ -81,7 +81,7 @@ const getDateByTimelineCategory = (
                 />
               </span>
             </div>
-            <div class="timeline-content relative col-span-11">
+            <div class="timeline-content relative col-span-10 md:col-span-11">
               <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12">
                   <h3 class="mb-1 text-xs text-gray-600 dark:text-neutral-400">
