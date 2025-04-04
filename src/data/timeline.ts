@@ -83,9 +83,130 @@ export const TimelineCategoriesAsStaticDate: TimelineCategory[] = [
 ];
 
 const TimelineItems: Timeline[] = [
+  {
+    date: "2025-01-08",
+    category: "publication",
+    translation: {
+      tr: {
+        title: "Weak Paket ile Go'da Verimli Kaynak Yönetimi",
+        subtitle: "Medium", 
+        description:
+          "Pratik bir Server Sent Events Demosu ile",
+      },
+      en: {
+        title: "Efficient Resource Management in Go with Weak Package",
+        subtitle: "Medium",
+        description:
+          "with a practical Server Sent Events Demo",
+      },
+    },
+    tags: ["golang"],
+    url: "https://blog.9ssi7.dev/efficient-resource-management-in-go-with-weak-package-2e2d3542c6cc",
+  },
+
+  {
+    date: "2025-01-08",
+    category: "publication",
+    translation: {
+      tr: {
+        title: "Go'da Iterator Deseni Kullanma",
+        subtitle: "Medium", 
+        description:
+          "Birleşik Veri Kaynağı Entegrasyonu için Go'da Iterator Deseni Kullanma",
+      },
+      en: {
+        title: "Leveraging Go’s Iterator Pattern",
+        subtitle: "Medium",
+        description:
+          "for Unified Data Source Integration",
+      },
+    },
+    tags: ["golang"],
+    url: "https://engineering.teknasyon.com/leveraging-gos-iterator-pattern-30b7d3be783f",
+  },
+  
+  {
+    date: "2025-01-04",
+    category: "publication",
+    translation: {
+      tr: {
+        title: "Reflection'ın Go'da Performans Kritik Uygulamalar İçin Kullanılmasının Neden Tercih Edilmemesi Gerektiğini Anlatan Bir Makale",
+        subtitle: "Medium",
+        description:
+          "Reflection'ın Go'da performans kritik uygulamalar için kullanılmasının neden tercih edilmemesi gerektiğini anlatan bir makale.",
+      },
+      en: {
+        title: "Why You Should Avoid Reflection in Go for Performance-Critical Applications",
+        subtitle: "Medium",
+        description:
+          "An article explaining why reflection should not be used for performance-critical applications in Go.",
+      },
+    },
+    tags: ["golang"],
+    url: "https://blog.9ssi7.dev/why-you-should-avoid-reflection-in-go-for-performance-critical-applications-1e835b341b35",
+  },
+  {
+    date: "2024-11-12",
+    category: "publication",
+    translation: {
+      tr: {
+        title: "Şifresiz Mimari",
+        subtitle: "Medium",
+        description:
+          "Geleneksel Kimlik Doğrulama Sistemlerinin Sorunlarını Çözmek",
+      },
+      en: {
+        title: "Passwordless Architecture",
+        subtitle: "Medium",
+        description:
+          "Solving the Problems of Traditional Authentication Systems",
+      },
+    },
+    tags: ["golang"],
+    url: "https://engineering.turistikrota.com/passwordless-architecture-18d03e4dcb6a",
+  },
+
+  {
+    date: "2024-10-7",
+    category: "publication",
+    translation: {
+      tr: {
+        title: "Go'da Fonksiyonel Seçenekleri Yakalama",
+        subtitle: "Medium",
+        description:
+          "Go'da fonksiyonel seçenekleri yakalama hakkında bir makale.",
+      },
+      en: {
+        title: "Embracing Functional Options in Go",
+        subtitle: "Medium",
+        description:
+          "An article about capturing functional options in Go.",
+      },
+    },
+    tags: ["golang"],
+    url: "https://blog.9ssi7.dev/embracing-functional-options-in-go-05e00381f23e",
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   {
     date: "2024-08-30",
+    endDate: "2025-01-01",
     category: "project",
     translation: {
       tr: {
@@ -343,18 +464,17 @@ const TimelineItems: Timeline[] = [
   },
   {
     date: "2023-02-01",
-    endDate: "2024-03-01",
     category: "project",
     translation: {
       tr: {
-        title: "Geliştirici",
-        subtitle: "Turistikrota",
+        title: "Kurucu",
+        subtitle: "Turistik Rota",
         description:
           "Turistikrota projesini hayata geçirdim. Bu proje ile Türkiye'nin turistik bölgelerini ve rotalarını keşfetme fırsatı sunarak çevrimiçi rezervasyon sistemi sunmayı amaçladık.",
       },
       en: {
-        title: "Developer",
-        subtitle: "Turistikrota",
+        title: "Founder",
+        subtitle: "Turistik Rota",
         description:
           "I launched the Turistikrota project. With this project, we aimed to provide an online reservation system by offering the opportunity to explore Turkey's touristic regions and routes.",
       },
@@ -381,7 +501,7 @@ const TimelineItems: Timeline[] = [
       },
     },
     tags: ["node", "typescript"],
-    url: "https://galatajs.org",
+    url: "https://github.com/galatajs",
   },
   {
     date: "2021-10-01",

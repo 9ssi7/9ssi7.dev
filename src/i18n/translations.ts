@@ -6,7 +6,7 @@ export const en = {
   page_home: "Home",
 
   cities_istanbul_turkey: "Istanbul, Turkey",
-  product_developer: "Product Developer",
+  software_developer: "Software Developer",
 
   basics_learn_more: "Learn More",
   basics_present: "Present",
@@ -48,7 +48,7 @@ export const tr = {
   page_home: "Anasayfa",
 
   cities_istanbul_turkey: "İstanbul, Türkiye",
-  product_developer: "Ürün Geliştirici",
+  software_developer: "Yazılım Geliştirici",
 
   basics_learn_more: "Daha Fazla Bilgi",
   basics_present: "Şu Anda",

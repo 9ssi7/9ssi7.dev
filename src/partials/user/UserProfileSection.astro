@@ -6,7 +6,7 @@ const { t } = useI18n(getLangFromHeaders(Astro.request.headers));
 
 <div class="flex items-center gap-x-3">
   <div class="shrink-0">
-    <img class="shrink-0 size-16 rounded-full" src="/profile.webp" alt="Avatar">
+    <img class="shrink-0 size-16 rounded-full object-cover" src="/profile.webp" alt="Avatar">
   </div>
 
   <div class="grow">
@@ -14,7 +14,7 @@ const { t } = useI18n(getLangFromHeaders(Astro.request.headers));
       Salih İbrahimbaş
     </h1>
     <p class="text-sm text-gray-600 dark:text-neutral-400">
-      {t("product_developer")}
+      {t("software_developer")}
     </p>
   </div>
 </div>
