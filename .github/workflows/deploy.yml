@@ -1,0 +1,30 @@
+name: 🚀 Deploy to Production
+on:
+  release:
+    types: [released]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: 🕊 Deploy to Prod
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          
+      - run: npm i
+          
+      - run: npm run build
+
+      - name: 🚀 Publish Base Service
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          command: deploy
