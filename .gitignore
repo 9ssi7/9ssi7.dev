@@ -26,4 +26,6 @@ pnpm-debug.log*
 .env.development
 .env
 .env.production
+.dev.vars.development
+.dev.vars
 *.lock

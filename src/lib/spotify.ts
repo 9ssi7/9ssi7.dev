@@ -40,8 +40,8 @@ interface SpotifyTokenResponse {
 }
 
 async function getSpotifyAccessToken(): Promise<string | null> {
-  const clientId = import.meta.env.SPOTIFY_CLIENT_ID;
-  const clientSecret = import.meta.env.SPOTIFY_CLIENT_SECRET;
+  const clientId = process.env.SPOTIFY_CLIENT_ID;
+  const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
   
   if (!clientId || !clientSecret) {
     console.error('Spotify credentials not configured');
@@ -134,7 +134,7 @@ export async function fetchSpotifyShows(showIds: string[]): Promise<SpotifyShow[
 }
 
 export async function fetchUserPodcasts(): Promise<SpotifyShow[]> {
-  const podcastIds = import.meta.env.SPOTIFY_PODCAST_IDS || ""
+  const podcastIds = process.env.SPOTIFY_PODCAST_IDS || ""
   const showIds = podcastIds?.split(',').map((id: string) => id.trim());
   return fetchSpotifyShows(showIds);
 }

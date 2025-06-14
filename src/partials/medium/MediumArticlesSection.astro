@@ -5,7 +5,7 @@ import { useI18n } from "@/i18n/utils";
 
 const { t, d } = useI18n(Astro.locals.lang);
 
-const mediumUsername = import.meta.env.MEDIUM_USERNAME || "9ssi7";
+const mediumUsername = process.env.MEDIUM_USERNAME || "9ssi7";
 const articles = await fetchMediumArticles(mediumUsername);
 const displayArticles = articles.slice(0, 6); // Show latest 6 articles
 ---

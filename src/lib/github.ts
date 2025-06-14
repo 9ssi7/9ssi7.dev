@@ -1,4 +1,4 @@
-const TOKEN = import.meta.env.GITHUB_TOKEN;
+const TOKEN = process.env.GITHUB_TOKEN;
 
 const query = `
 query($from:DateTime!, $to:DateTime!) {
