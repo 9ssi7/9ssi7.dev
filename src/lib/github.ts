@@ -72,10 +72,12 @@ export async function getContributions(userName: string): Promise<ApiResponse> {
     query,
     variables,
   };
+  const uniqueAgent = `9ssi7dev (https://9ssi7.dev) ${Math.random()}`;
   const res = await fetch("https://api.github.com/graphql", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${TOKEN}`,
+      "User-Agent": uniqueAgent,
     },
     body: JSON.stringify(body),
   });
