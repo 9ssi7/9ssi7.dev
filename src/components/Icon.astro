@@ -15,7 +15,9 @@ import Code from "@lucide/astro/icons/code";
 import Award from "@lucide/astro/icons/award";
 import Users from "@lucide/astro/icons/users";
 import Book from "@lucide/astro/icons/book";
+import Youtube from "@lucide/astro/icons/youtube";
 import GitBranch from "@lucide/astro/icons/git-branch";
+import Cloudflare from "simple-icons-astro/Cloudflare";
 
 import Bluesky from "simple-icons-astro/Bluesky";
 import X from "simple-icons-astro/X";
@@ -28,7 +30,7 @@ type Props = {
 
 const { name, className } = Astro.props;
 
-export type IconName = "bluesky" | "x" | "docker" | "go" | "kubernetes" | "mongodb" | "nodejs" | "postgres" | "react" | "typescript" | "vue" | "github" | "linkedin" | "building2" | "code" | "award" | "users" | "book" | "git-branch";
+export type IconName = "bluesky" | "x" | "docker" | "go" | "kubernetes" | "mongodb" | "nodejs" | "postgres" | "react" | "typescript" | "vue" | "github" | "linkedin" | "building2" | "code" | "award" | "users" | "book" | "git-branch" | "youtube" | "cloudflare";
 
 const icons: Record<IconName, AstroComponent> = {
     bluesky: Bluesky,
@@ -50,9 +52,11 @@ const icons: Record<IconName, AstroComponent> = {
     users: Users,
     book: Book,
     "git-branch": GitBranch,
+    youtube: Youtube,
+    cloudflare: Cloudflare,
 }
 
 const Comp = icons[name];
 ---
 
-<Comp class={className} />
+{Comp && <Comp class={className} />}

@@ -1,4 +1,5 @@
 ---
+import Icon from "@/components/Icon.astro";
 import ProfileItems from "@/data/profile";
 import { useI18n } from "@/i18n/utils";
 
@@ -26,20 +27,15 @@ const { t } = useI18n(Astro.locals.lang);
 
       <div class="min-w-max flex gap-0.5">
 
-        {ProfileItems.map(item =>  {
-          const Icon = item.icon;
-          return <a
+        {ProfileItems.map(item =>   <a
           href={item.url}
           target="_blank"
           rel="noopener noreferrer"
           class="rounded-md flex items-center justify-center transition-colors duration-200 hover:bg-default text-gray-800 dark:text-neutral-200 text-sm cursor-pointer p-2"
         >
-          <Icon class="size-4" />
-        </a>
-        })}
-       
+          <Icon name={item.icon} className="size-4" />
+        </a>)}
       </div>
-      
     </div>
   </nav>
 </header>

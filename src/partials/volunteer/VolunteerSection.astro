@@ -1,0 +1,21 @@
+---
+import SectionList from "@/components/SectionList.astro";
+import { VolunteerItems } from "@/data/volunteer";  
+import { useI18n } from "@/i18n/utils";
+
+type Props = {
+  class?: string;
+};
+
+const { class: className } = Astro.props;
+
+const { t } = useI18n(Astro.locals.lang);
+---
+
+<SectionList 
+  title={t("category_volunteer")}
+  items={VolunteerItems}
+  color="red"
+  icon="users"
+  class={className}
+/> 

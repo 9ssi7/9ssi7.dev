@@ -1,0 +1,118 @@
+---
+import Icon, { type IconName } from "@/components/Icon.astro";
+import { TagColors, TagIcons, type BaseItem } from "@/data/types";
+import { useI18n } from "@/i18n/utils";
+import { ExternalLink } from "@lucide/astro";
+
+type Props = {
+  title: string | string[];
+  items: BaseItem[];
+  icon: IconName
+  color: keyof typeof colors;
+  class?: string;
+};
+
+const { title, items, color, icon, class: className } = Astro.props;
+
+const { t, d, lang: locale } = useI18n(Astro.locals.lang);
+
+const timelineDateOpts: Intl.DateTimeFormatOptions = {
+  year: "numeric",
+  month: "short",
+  day: undefined,
+};
+
+const getDateString = (date: string, endDate?: string): string => {
+  if (endDate) {
+    return `${d(date, timelineDateOpts)} - ${d(endDate, timelineDateOpts)}`;
+  }
+  return `${d(date, timelineDateOpts)} - ${t("basics_present")}`;
+};
+
+const colors = {
+  blue: {
+    border: "border-blue-200 dark:border-blue-700",
+    dot: "bg-blue-500/10 text-blue-500",
+  },
+  red: {
+    border: "border-red-200 dark:border-red-700",
+    dot: "bg-red-500/10 text-red-500",
+  },
+  green: {
+    border: "border-green-200 dark:border-green-700",
+    dot: "bg-green-500/10 text-green-500",
+  },
+  yellow: {
+    border: "border-yellow-200 dark:border-yellow-700",
+    dot: "bg-yellow-500/10 text-yellow-500",
+  },
+  purple: {
+    border: "border-purple-200 dark:border-purple-700",
+    dot: "bg-purple-500/10 text-purple-500",
+  },
+} as const
+---
+
+<section class={`animate-fade-in ${className ? className : ""}`}>
+  <h2 class="mb-5 font-medium text-gray-800 dark:text-neutral-200">{Array.isArray(title) ? title[0] : title}</h2>
+  <div class="space-y-6 relative">
+    <div
+    class="absolute top-0 bottom-0 transform left-5 w-0.5 bg-third"
+  >
+  </div>
+    {
+      items.map((item) => (
+        <div class={`relative`}>
+          <div class={`z-10 rounded-full w-10 h-10 bg-third col-span-2 md:col-span-1`}>
+            <span class={`w-10 h-10 rounded-full flex items-center justify-center ${colors[color].dot}`}>
+              <Icon name={icon} className="size-4" />
+            </span>
+          </div>
+          <div class="space-y-2 pl-12 -mt-7">
+            <h3 class="text-xs text-gray-600 dark:text-neutral-400">
+              {getDateString(item.date, item.endDate)}
+            </h3>
+            <div>
+              <h4 class="font-semibold text-sm text-gray-800 dark:text-neutral-200">
+                {item.translation[locale].title}
+              </h4>
+              {item.translation[locale].subtitle && (
+                <p class="text-xs text-gray-600 dark:text-neutral-400">
+                  {item.translation[locale].subtitle}
+                </p>
+              )}
+            </div>
+            <p class="text-sm text-gray-600 dark:text-neutral-400 whitespace-pre-line">
+              {item.translation[locale].description}
+            </p>
+            {item.tags && (
+              <div class="flex flex-wrap gap-2">
+                {item.tags.map((tag) => (
+                  <span
+                    class={`inline-flex gap-1 text-sm items-center px-2 py-1 select-none rounded-full ${TagColors[tag]}`}
+                  >
+                    <Icon name={TagIcons[tag]} className="size-4" />
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+            {item.url && (
+              <div>
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center gap-1 text-blue-600 dark:text-blue-400 text-sm"
+                >
+                  <ExternalLink class="size-4" />
+                  {t("basics_learn_more")}
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section> 

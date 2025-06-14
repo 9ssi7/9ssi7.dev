@@ -35,9 +35,12 @@ export const en = {
   "category_open-source": "Open Source",
   category_all: "All",
 
+  personal_projects: "Personal Projects",
+  freelance_projects: "Freelance Projects",
+
   header_about: "About",
   header_projects: "Projects",
-  header_work: "Work",
+  header_work: "Work Experience",
   header_blog: "Blog",
 
   medium_articles: "Medium Articles",
@@ -81,7 +84,7 @@ export const tr = {
   timeline_title: "Zaman Çizelgesi",
   timeline_desc: "Şimdiye kadar olan yolculuğumdan bazı önemli noktalar.",
 
-  category_work: "İş",
+  category_work: "İş Deneyimi",
   category_education: "Eğitim",
   category_project: "Projeler",
   category_certificate: "Sertifikalar",
@@ -89,6 +92,9 @@ export const tr = {
   category_publication: "Yayınlar",
   "category_open-source": "Açık Kaynak",
   category_all: "Hepsi",
+
+  personal_projects: "Kişisel Projeler",
+  freelance_projects: "Freelance Projeler",
 
   header_about: "Hakkımda",
   header_projects: "Projeler",

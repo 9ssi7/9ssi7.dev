@@ -1,0 +1,49 @@
+---
+import SectionList from "@/components/SectionList.astro";
+import { ProjectItems } from "@/data/projects";
+import { useI18n } from "@/i18n/utils";
+import { User, Briefcase } from "@lucide/astro";
+
+type Props = {
+  class?: string;
+};
+
+const { class: className } = Astro.props;
+
+const { t } = useI18n(Astro.locals.lang);
+
+const personalProjects = ProjectItems.filter(item => item.type === "personal");
+const freelanceProjects = ProjectItems.filter(item => item.type === "freelance");
+---
+
+<div class={`space-y-8 ${className ? className : ""}`}>
+  {personalProjects.length > 0 && (
+    <div>
+      <h3 class="mb-4 flex items-center gap-2 text-lg font-medium text-gray-800 dark:text-neutral-200">
+        <User class="size-5" />
+        {t("personal_projects")}
+      </h3>
+      <SectionList 
+        title=""
+        items={personalProjects}
+        color="blue"
+        icon="code"
+      />
+    </div>
+  )}
+
+  {freelanceProjects.length > 0 && (
+    <div>
+      <h3 class="mb-4 flex items-center gap-2 text-lg font-medium text-gray-800 dark:text-neutral-200">
+        <Briefcase class="size-5" />
+        {t("freelance_projects")}
+      </h3>
+      <SectionList 
+        title=""
+        items={freelanceProjects}
+        color="green"
+        icon="code"
+      />
+    </div>
+  )}
+</div> 
