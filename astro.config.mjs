@@ -1,21 +1,19 @@
-import mdx from '@astrojs/mdx';
-import tailwind from '@astrojs/tailwind';
-import { defineConfig } from 'astro/config';
-
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+import mdx from "@astrojs/mdx";
+import { defineConfig } from "astro/config";
+import cloudflare from "@astrojs/cloudflare";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-    integrations: [tailwind(), mdx()],
-    vite: {
-        resolve: {
-            alias: {
-                "@": path.resolve(__dirname, "./src"),
-                "~": path.resolve(__dirname, "./"),
-            }
-        }
-    }
+  output: "server",
+  adapter: cloudflare({
+    platformProxy: {
+      enabled: true,
+    },
+    imageService: "cloudflare",
+  }),
+  integrations: [mdx()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

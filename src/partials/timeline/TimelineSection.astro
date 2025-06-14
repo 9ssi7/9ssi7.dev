@@ -7,10 +7,10 @@ import TimelineItems, {
   TimelineCategoryIcons,
   TimelineTagColors,
   TimelineTagIcons,
-  isTimelineCategory,
   type TimelineCategory,
 } from "@/data/timeline";
 import { getLangFromHeaders, useI18n } from "@/i18n/utils";
+import { ExternalLink, LayoutGrid } from "@lucide/astro";
 
 type Props = {
   class?: string;
@@ -43,24 +43,25 @@ const getDateByTimelineCategory = (
 
   <div class="grid grid-cols-2 md:flex md:flex-wrap gap-4">
     <a
-      class="px-3 py-2 text-sm flex items-center gap-2 rounded-md bg-opacity-10 min-w-max"
+      class="px-3 py-2 text-sm flex items-center gap-2 rounded-md min-w-max"
       href="/?category=all"
       data-filter-category="all"
     >
-      <i class="bx bx-grid-alt bx-xs"></i>
+    <LayoutGrid class="size-4" />
       {t("category_all")}
     </a>
     {
-      AllCategories.map((category) => (
-        <a
-          class={`px-3 flex items-center gap-2 py-2 text-sm rounded-md bg-opacity-10 col-span-1 hover:bg-blue-500 hover:bg-opacity-30 transition-colors duration-200`}
+      AllCategories.map((category) => {
+        const Icon = TimelineCategoryIcons[category];
+        return    <a
+          class={`px-3 flex items-center gap-2 py-2 text-sm rounded-md col-span-1 hover:bg-blue-500/30 transition-colors duration-200`}
           href={`/?category=${category}`}
           data-filter-category={category}
         >
-          <i class={`bx bx-xs ${TimelineCategoryIcons[category]}`} />
+          <Icon class="size-4" />
           {t(`category_${category}`)}
         </a>
-      ))
+      })
     }
   </div>
   <div class="relative mt-4 md:mt-7">
@@ -70,15 +71,14 @@ const getDateByTimelineCategory = (
     </div>
     <div class="relative">
       {
-        TimelineItems.map((item) => (
-          <div class="timeline-item grid grid-cols-12 mb-10" data-category={item.category}>
+        TimelineItems.map((item) => {
+          const Icon = TimelineCategoryIcons[item.category];
+          return    <div class="timeline-item grid grid-cols-12 mb-10" data-category={item.category}>
             <div class={`z-10 rounded-full w-10 h-10 bg-third col-span-2 md:col-span-1`}>
               <span
-                class={`w-10 h-10 rounded-full flex items-center justify-center bg-opacity-5 ${TimelineCategoryColors[item.category]}`}
+                class={`w-10 h-10 rounded-full flex items-center justify-center ${TimelineCategoryColors[item.category]}`}
               >
-                <i
-                  class={`bx ${TimelineCategoryIcons[item.category]} text-lg`}
-                />
+                <Icon class="size-4" />
               </span>
             </div>
             <div class="timeline-content relative col-span-10 md:col-span-11">
@@ -115,14 +115,15 @@ const getDateByTimelineCategory = (
 
               {item.tags && (
                 <div class="mt-2 flex flex-wrap gap-2">
-                  {item.tags.map((tag) => (
-                    <span
-                      class={`inline-flex text-sm bg-opacity-5 items-center px-2 py-1 select-none rounded-full ${TimelineTagColors[tag]}`}
+                  {item.tags.map((tag) => {
+                    const Icon = TimelineTagIcons[tag];
+                    return  <span
+                      class={`inline-flex text-sm items-center px-2 py-1 select-none rounded-full ${TimelineTagColors[tag]}`}
                     >
-                      <i class={`bx mr-1 text-lg ${TimelineTagIcons[tag]}`} />
+                      <Icon class="size-4" />
                       {tag}
                     </span>
-                  ))}
+                  })}
                 </div>
               )}
               {item.url && (
@@ -133,14 +134,14 @@ const getDateByTimelineCategory = (
                     rel="noopener noreferrer"
                     class="flex items-center gap-1 text-blue-600 dark:text-blue-400 text-sm"
                   >
-                    <i class="bx bx-link-external text-lg" />
+                    <ExternalLink class="size-4" />
                     {t("basics_learn_more")}
                   </a>
                 </div>
               )}
             </div>
           </div>
-        ))
+        })
       }
     </div>
   </div>
@@ -170,7 +171,7 @@ const getDateByTimelineCategory = (
     } else {
       document
         .querySelector(`[data-filter-category=all]`)
-        ?.classList.add("bg-blue-500", "text-gray-800", "dark:text-white");
+        ?.classList.add("bg-blue-500/20", "text-blue-500", "dark:text-white");
     }
   });
 </script>

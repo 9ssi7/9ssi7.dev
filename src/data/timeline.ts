@@ -1,4 +1,6 @@
 import type { Translation } from "@/i18n/types";
+import { Award, Book, Building2, Code, GitBranch, Users, type AstroComponent } from "@lucide/astro";
+import { Docker, Go, Kubernetes, Mongodb, Nodedotjs, Postgresql, React, Typescript, Vuedotjs } from "simple-icons-astro";
 
 export type TimelineCategory =
   | "work"
@@ -34,46 +36,46 @@ export type Timeline = {
   url?: string;
 };
 
-export const TimelineCategoryIcons: Record<TimelineCategory, string> = {
-  work: "bx-buildings",
-  project: "bx-code",
-  certificate: "bx-award",
-  volunteer: "bx-group",
-  publication: "bx-book",
-  "open-source": "bx-git-branch",
+export const TimelineCategoryIcons: Record<TimelineCategory, AstroComponent> = {
+  work: Building2,
+  project: Code,
+  certificate: Award,
+  volunteer: Users,
+  publication: Book,
+  "open-source": GitBranch,
 };
 
-export const TimelineTagIcons: Record<TimelineTag, string> = {
-  node: "bxl-nodejs",
-  mongodb: "bxl-mongodb",
-  golang: "bxl-go-lang",
-  react: "bxl-react",
-  typescript: "bxl-typescript",
-  vue: "bxl-vuejs",
-  docker: "bxl-docker",
-  postgres: "bxl-postgresql",
-  kubernetes: "bxl-kubernetes",
+export const TimelineTagIcons: Record<TimelineTag, AstroComponent> = {
+  node: Nodedotjs,
+  mongodb: Mongodb,
+  golang: Go,
+  react: React,
+  typescript: Typescript,
+  vue: Vuedotjs,
+  docker: Docker,
+  postgres: Postgresql,
+  kubernetes: Kubernetes,
 };
 
 export const TimelineCategoryColors: Record<TimelineCategory, string> = {
-  work: "bg-blue-500 text-blue-500",
-  project: "bg-yellow-500 text-yellow-500",
-  certificate: "bg-purple-500 text-purple-500",
-  volunteer: "bg-red-500 text-red-500",
-  publication: "bg-pink-500 text-pink-500",
-  "open-source": "bg-blue-500 text-blue-500",
+  work: "bg-blue-500/5 text-blue-500",
+  project: "bg-yellow-500/5 text-yellow-500",
+  certificate: "bg-purple-500/5 text-purple-500",
+  volunteer: "bg-red-500/5 text-red-500",
+  publication: "bg-pink-500/5 text-pink-500",
+  "open-source": "bg-blue-500/5 text-blue-500",
 };
 
 export const TimelineTagColors: Record<TimelineTag, string> = {
-  node: "bg-green-500 text-green-400",
-  mongodb: "bg-green-500 text-green-500",
-  golang: "bg-blue-500 text-blue-500",
-  react: "bg-blue-500 text-blue-500",
-  typescript: "bg-blue-500 text-blue-500",
-  vue: "bg-green-500 text-green-500",
-  docker: "bg-blue-500 text-blue-500",
-  postgres: "bg-blue-500 text-blue-500",
-  kubernetes: "bg-blue-500 text-blue-500",
+  node: "bg-green-500/5 text-green-400",
+  mongodb: "bg-green-500/5 text-green-500",
+  golang: "bg-blue-500/5 text-blue-500",
+  react: "bg-blue-500/5 text-blue-500",
+  typescript: "bg-blue-500/5 text-blue-500",
+  vue: "bg-green-500/5 text-green-500",
+  docker: "bg-blue-500/5 text-blue-500",
+  postgres: "bg-blue-500/5 text-blue-500",
+  kubernetes: "bg-blue-500/5 text-blue-500",
 };
 
 export const TimelineCategoriesAsResponsiveDate: TimelineCategory[] = ["work"];

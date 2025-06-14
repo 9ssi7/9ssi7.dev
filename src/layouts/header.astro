@@ -27,14 +27,17 @@ const { t } = useI18n(getLangFromHeaders(Astro.request.headers));
 
       <div class="min-w-max flex gap-0.5">
 
-        {ProfileItems.map(item =>  <a
+        {ProfileItems.map(item =>  {
+          const Icon = item.icon;
+          return <a
           href={item.url}
           target="_blank"
           rel="noopener noreferrer"
           class="rounded-md flex items-center justify-center transition-colors duration-200 hover:bg-default text-gray-800 dark:text-neutral-200 text-sm cursor-pointer p-2"
         >
-          <i class={`bx text-base ${item.icon}`} />
-        </a>)}
+          <Icon class="size-4" />
+        </a>
+        })}
        
       </div>
       

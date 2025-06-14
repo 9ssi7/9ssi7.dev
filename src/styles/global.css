@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+:root {
+  --bg-default: #f8f9fa;
+  --bg-secondary: #ffffff;
+  --bg-third: #f3f6f6;
+  --border-color: #e9ecef;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-default: #090909;
+    --bg-secondary: #121212;
+    --bg-third: #1d1d1d;
+    --border-color: #2a2a2a;
+  }
+}
+
+@theme {
+  --color-default: var(--bg-default);
+  --color-secondary: var(--bg-secondary);
+  --color-third: var(--bg-third);
+  --z-index-100: 100;
+  --z-index-101: 101;
+}
+
+html {
+  font-family: "Lexend", sans-serif;
+}
+
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+      border-color: var(--border-color);
+      outline-color: var(--border-color);
+    }
+  }
