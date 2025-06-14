@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "my-astro-app",
+	"name": "9ssi7dev",
 	"main": "./dist/_worker.js/index.js",
 	"compatibility_date": "2025-06-14",
 	"compatibility_flags": [
