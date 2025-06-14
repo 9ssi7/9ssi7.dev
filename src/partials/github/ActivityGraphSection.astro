@@ -1,0 +1,67 @@
+---
+import Tooltip from "@/components/Tooltip.astro";
+import { useI18n } from "@/i18n/utils";
+import { emptyApiResponse, getContributions } from "@/lib/github";
+
+const contributions = await getContributions("9ssi7").catch(
+  () => emptyApiResponse
+);
+
+const { t, d } = useI18n(Astro.locals.lang);
+
+const getContributionColor = (count: number) => {
+  switch (true) {
+    case count === 0:
+      return "bg-zinc-200 dark:bg-zinc-900";
+    case count < 10:
+      return "bg-green-400 dark:bg-green-800";
+    case count < 15:
+      return "bg-green-500 dark:bg-green-700";
+    case count < 25:
+      return "bg-green-600 dark:bg-green-600";
+    default:
+      return "bg-green-600 dark:bg-green-500";
+  }
+};
+
+---
+
+{
+  contributions.data.viewer.contributionsCollection.contributionCalendar
+    .totalContributions !== 0 && (
+    <section class="animate-fade-in pt-4">
+      <h2 class="font-medium text-gray-800 dark:text-neutral-200">GitHub {t("github_graph_title")}</h2>
+        <p class="mb-2 text-gray-500 dark:text-neutral-400 text-sm">
+          {t("github_graph_subtitle", {
+            total:
+              contributions.data.viewer.contributionsCollection.contributionCalendar.totalContributions.toString(),
+          })}
+        </p>
+
+        <div class="min-h-[5.7rem] relative overflow-x-auto">
+        <div class="flex gap-[3.5px] absolute bottom-0 left-0">
+          {contributions.data.viewer.contributionsCollection.contributionCalendar.weeks.map(
+            (week) => (
+              <div class="flex flex-col flex-wrap gap-[3.5px] select-none">
+                {week.contributionDays.map((day) => (
+                  <Tooltip
+                    content={
+                      t("github_graph_tooltip", {
+                        date: d(day.date),
+                        count: day.contributionCount.toString(),
+                      }) as string
+                    }
+                  >
+                    <div
+                      class={`w-2.5 h-2.5 rounded-xs ${getContributionColor(day.contributionCount)}`}
+                    />
+                  </Tooltip>
+                ))}
+              </div>
+            )
+          )}
+          </div>
+        </div>
+    </section>
+  )
+}

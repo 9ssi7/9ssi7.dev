@@ -8,20 +8,79 @@ interface Props {
 }
 
 const { content, position = "top", class: className } = Astro.props;
-
-const positionClasses: Record<Position, string> = {
-  top: "-top-11 left-1/2 -translate-x-1/2",
-  right: "top-1/2 -right-8 -translate-y-1/2",
-  bottom: "top-full",
-  left: "top-1/2 -left-8 -translate-y-1/2",
-};
 ---
 
-<div class={`tooltip-trigger relative group ${className}`}>
+<div class={`tooltip-trigger ${className}`}>
   <slot />
   <div
-    class={`tooltip min-w-max absolute z-101 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-300 bg-third p-2 rounded-md shadow-md ${positionClasses[position]}`}
+    class="tooltip fixed z-[9999999] invisible opacity-0 transition-opacity duration-200 text-sm bg-third px-2 py-1.5 rounded-md shadow-md pointer-events-none min-w-max"
+    data-position={position}
+    data-content={content}
   >
     {content}
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tooltipTriggers = document.querySelectorAll('.tooltip-trigger');
+    
+    tooltipTriggers.forEach(trigger => {
+      const tooltip = trigger.querySelector('.tooltip') as HTMLElement;
+      const position = tooltip.dataset.position as string;
+      
+      let showTimeout: number;
+      let hideTimeout: number;
+      
+      const showTooltip = () => {
+        clearTimeout(hideTimeout);
+        showTimeout = window.setTimeout(() => {
+          const rect = trigger.getBoundingClientRect();
+          const tooltipRect = tooltip.getBoundingClientRect();
+          
+          let x = 0;
+          let y = 0;
+          
+          switch (position) {
+            case 'top':
+              x = rect.left + rect.width / 2 - tooltipRect.width / 2;
+              y = rect.top - tooltipRect.height - 8;
+              break;
+            case 'bottom':
+              x = rect.left + rect.width / 2 - tooltipRect.width / 2;
+              y = rect.bottom + 8;
+              break;
+            case 'left':
+              x = rect.left - tooltipRect.width - 8;
+              y = rect.top + rect.height / 2 - tooltipRect.height / 2;
+              break;
+            case 'right':
+              x = rect.right + 8;
+              y = rect.top + rect.height / 2 - tooltipRect.height / 2;
+              break;
+          }
+          
+          const padding = 8;
+          x = Math.max(padding, Math.min(x, window.innerWidth - tooltipRect.width - padding));
+          y = Math.max(padding, Math.min(y, window.innerHeight - tooltipRect.height - padding));
+          
+          tooltip.style.left = `${x}px`;
+          tooltip.style.top = `${y}px`;
+          tooltip.classList.remove('invisible', 'opacity-0');
+          tooltip.classList.add('visible', 'opacity-100');
+        }, 100);
+      };
+      
+      const hideTooltip = () => {
+        clearTimeout(showTimeout);
+        hideTimeout = window.setTimeout(() => {
+          tooltip.classList.remove('visible', 'opacity-100');
+          tooltip.classList.add('invisible', 'opacity-0');
+        }, 50);
+      };
+      
+      trigger.addEventListener('mouseenter', showTooltip);
+      trigger.addEventListener('mouseleave', hideTooltip);
+    });
+  });
+</script>

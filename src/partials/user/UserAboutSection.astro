@@ -1,9 +1,9 @@
 ---
-import { getLangFromHeaders, useI18n } from "@/i18n/utils";
+import Icon from "@/components/Icon.astro";
+import { useI18n } from "@/i18n/utils";
 import { AtSign } from "@lucide/astro";
-import { Bluesky, X } from "simple-icons-astro";
 
-const { t, tv } = useI18n(getLangFromHeaders(Astro.request.headers));
+const { tv } = useI18n(Astro.locals.lang);
 ---
 
 <section class="mt-8">
@@ -32,7 +32,7 @@ const { t, tv } = useI18n(getLangFromHeaders(Astro.request.headers));
       </a>
     </li>
     <li class="flex items-center gap-x-2.5">
-      <Bluesky class="size-4" />
+      <Icon name="bluesky" className="size-4" />
       <a
         class="text-[13px] text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-none focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400"
         href="https://bsky.app/profile/9ssi7.dev"
@@ -42,7 +42,7 @@ const { t, tv } = useI18n(getLangFromHeaders(Astro.request.headers));
       </a>
     </li>
     <li class="flex items-center gap-x-2.5">
-      <X class="size-4" />
+      <Icon name="x" className="size-4" />
       <a
         class="text-[13px] text-gray-500 underline hover:text-gray-800 hover:decoration-2 focus:outline-none focus:decoration-2 dark:text-neutral-500 dark:hover:text-neutral-400"
         href="https://x.com/9ssi7"

@@ -1,7 +1,5 @@
 import type { Translation } from "@/i18n/types";
-import { Award, Book, Building2, Code, GitBranch, Users, type AstroComponent } from "@lucide/astro";
-import { Docker, Go, Kubernetes, Mongodb, Nodedotjs, Postgresql, React, Typescript, Vuedotjs } from "simple-icons-astro";
-
+import type { IconName } from "@/components/Icon.astro";
 export type TimelineCategory =
   | "work"
   | "project"
@@ -36,25 +34,25 @@ export type Timeline = {
   url?: string;
 };
 
-export const TimelineCategoryIcons: Record<TimelineCategory, AstroComponent> = {
-  work: Building2,
-  project: Code,
-  certificate: Award,
-  volunteer: Users,
-  publication: Book,
-  "open-source": GitBranch,
+export const TimelineCategoryIcons: Record<TimelineCategory,  IconName> = {
+  work: "building2",
+  project: "code",
+  certificate: "award",
+  volunteer: "users",
+  publication: "book",
+  "open-source": "git-branch",
 };
 
-export const TimelineTagIcons: Record<TimelineTag, AstroComponent> = {
-  node: Nodedotjs,
-  mongodb: Mongodb,
-  golang: Go,
-  react: React,
-  typescript: Typescript,
-  vue: Vuedotjs,
-  docker: Docker,
-  postgres: Postgresql,
-  kubernetes: Kubernetes,
+export const TimelineTagIcons: Record<TimelineTag,  IconName> = {
+  node: "nodejs",
+  mongodb: "mongodb",
+  golang: "go",
+  react: "react",
+  typescript: "typescript",
+  vue: "vue",
+  docker: "docker",
+  postgres: "postgres",
+  kubernetes: "kubernetes",
 };
 
 export const TimelineCategoryColors: Record<TimelineCategory, string> = {

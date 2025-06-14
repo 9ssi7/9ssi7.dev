@@ -1,4 +1,5 @@
 ---
+import Icon from "@/components/Icon.astro";
 import TimelineItems, {
   AllCategories,
   TimelineCategoriesAsResponsiveDate,
@@ -51,17 +52,14 @@ const getDateByTimelineCategory = (
       {t("category_all")}
     </a>
     {
-      AllCategories.map((category) => {
-        const Icon = TimelineCategoryIcons[category];
-        return    <a
+      AllCategories.map((category) =>  <a
           class={`px-3 flex items-center gap-2 py-2 text-sm rounded-md col-span-1 hover:bg-blue-500/30 transition-colors duration-200`}
           href={`/?category=${category}`}
           data-filter-category={category}
         >
-          <Icon class="size-4" />
+          <Icon name={TimelineCategoryIcons[category]} className="size-4" />
           {t(`category_${category}`)}
-        </a>
-      })
+        </a>)
     }
   </div>
   <div class="relative mt-4 md:mt-7">
@@ -71,14 +69,12 @@ const getDateByTimelineCategory = (
     </div>
     <div class="relative">
       {
-        TimelineItems.map((item) => {
-          const Icon = TimelineCategoryIcons[item.category];
-          return    <div class="timeline-item grid grid-cols-12 mb-10" data-category={item.category}>
+        TimelineItems.map((item) => <div class="timeline-item grid grid-cols-12 mb-10" data-category={item.category}>
             <div class={`z-10 rounded-full w-10 h-10 bg-third col-span-2 md:col-span-1`}>
               <span
                 class={`w-10 h-10 rounded-full flex items-center justify-center ${TimelineCategoryColors[item.category]}`}
               >
-                <Icon class="size-4" />
+                <Icon name={TimelineCategoryIcons[item.category]} className="size-4" />
               </span>
             </div>
             <div class="timeline-content relative col-span-10 md:col-span-11">
@@ -115,15 +111,12 @@ const getDateByTimelineCategory = (
 
               {item.tags && (
                 <div class="mt-2 flex flex-wrap gap-2">
-                  {item.tags.map((tag) => {
-                    const Icon = TimelineTagIcons[tag];
-                    return  <span
+                  {item.tags.map((tag) => <span
                       class={`inline-flex text-sm items-center px-2 py-1 select-none rounded-full ${TimelineTagColors[tag]}`}
                     >
-                      <Icon class="size-4" />
+                      <Icon name={TimelineTagIcons[tag]} className="size-4" />
                       {tag}
-                    </span>
-                  })}
+                    </span>)}
                 </div>
               )}
               {item.url && (
@@ -140,8 +133,7 @@ const getDateByTimelineCategory = (
                 </div>
               )}
             </div>
-          </div>
-        })
+          </div>)
       }
     </div>
   </div>

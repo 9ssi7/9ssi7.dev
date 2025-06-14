@@ -8,12 +8,17 @@ export default defineConfig({
   output: "server",
   adapter: cloudflare({
     platformProxy: {
-      enabled: true,
+      enabled: false,
     },
     imageService: "cloudflare",
   }),
   integrations: [mdx()],
   vite: {
+    server: {
+      watch: {
+        ignored: ['**/node_modules/simple-icons-astro/**', '**/.simple-icons-cache/**'],
+      },
+    },
     plugins: [tailwindcss()],
   },
 });

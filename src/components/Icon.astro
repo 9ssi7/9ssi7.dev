@@ -1,0 +1,58 @@
+---
+import Docker from "simple-icons-astro/Docker"
+import Go from "simple-icons-astro/Go";
+import Kubernetes from "simple-icons-astro/Kubernetes";
+import Mongodb from "simple-icons-astro/Mongodb";
+import Nodedotjs from "simple-icons-astro/Nodedotjs";
+import Postgresql from "simple-icons-astro/Postgresql";
+import React from "simple-icons-astro/React";
+import Typescript from "simple-icons-astro/Typescript";
+import Vuedotjs from "simple-icons-astro/Vuedotjs";
+import Github from "simple-icons-astro/Github";
+import Invision from "simple-icons-astro/Invision";
+import Building2 from "@lucide/astro/icons/building-2";
+import Code from "@lucide/astro/icons/code";
+import Award from "@lucide/astro/icons/award";
+import Users from "@lucide/astro/icons/users";
+import Book from "@lucide/astro/icons/book";
+import GitBranch from "@lucide/astro/icons/git-branch";
+
+import Bluesky from "simple-icons-astro/Bluesky";
+import X from "simple-icons-astro/X";
+import type { AstroComponent } from "@lucide/astro";
+
+type Props = {
+    name: IconName
+    className?: string
+}
+
+const { name, className } = Astro.props;
+
+export type IconName = "bluesky" | "x" | "docker" | "go" | "kubernetes" | "mongodb" | "nodejs" | "postgres" | "react" | "typescript" | "vue" | "github" | "linkedin" | "building2" | "code" | "award" | "users" | "book" | "git-branch";
+
+const icons: Record<IconName, AstroComponent> = {
+    bluesky: Bluesky,
+    x: X,
+    docker: Docker,
+    go: Go,
+    kubernetes: Kubernetes,
+    mongodb: Mongodb,
+    nodejs: Nodedotjs,
+    postgres: Postgresql,
+    react: React,
+    typescript: Typescript,
+    vue: Vuedotjs,
+    github: Github,
+    linkedin: Invision,
+    building2: Building2,
+    code: Code,
+    award: Award,
+    users: Users,
+    book: Book,
+    "git-branch": GitBranch,
+}
+
+const Comp = icons[name];
+---
+
+<Comp class={className} />

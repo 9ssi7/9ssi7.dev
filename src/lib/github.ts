@@ -1,15 +1,18 @@
 const TOKEN = import.meta.env.GITHUB_TOKEN;
 
 const query = `
-query($userName:String!) {
-  user(login: $userName){
-    contributionsCollection {
+query($from:DateTime!, $to:DateTime!) {
+  viewer {
+    contributionsCollection(from: $from, to: $to) {
+      totalCommitContributions
+      restrictedContributionsCount
       contributionCalendar {
         totalContributions
         weeks {
           contributionDays {
             contributionCount
             date
+            color
           }
         }
       }
@@ -21,12 +24,15 @@ query($userName:String!) {
 type ContributionDay = {
   contributionCount: number;
   date: string;
+  color: string;
 };
 
 type ApiResponse = {
   data: {
-    user: {
+    viewer: {
       contributionsCollection: {
+        restrictedContributionsCount: number;
+        totalCommitContributions: number;
         contributionCalendar: {
           totalContributions: number;
           weeks: {
@@ -40,8 +46,10 @@ type ApiResponse = {
 
 export const emptyApiResponse: ApiResponse = {
   data: {
-    user: {
+    viewer: {
       contributionsCollection: {
+        restrictedContributionsCount: 0,
+        totalCommitContributions: 0,
         contributionCalendar: {
           totalContributions: 0,
           weeks: [],
@@ -52,9 +60,12 @@ export const emptyApiResponse: ApiResponse = {
 };
 
 export async function getContributions(userName: string): Promise<ApiResponse> {
+  const lastYearOfToday = new Date(new Date().getFullYear() - 1, new Date().getMonth(), new Date().getDate());
+  const today = new Date();
   const variables = `
   {
-    "userName": "${userName}"
+    "from": "${lastYearOfToday.toISOString()}",
+    "to": "${today.toISOString()}"
   }
 `;
   const body = {

@@ -1,13 +1,13 @@
 ---
 import Badge from "@/components/Badge.astro";
-import { getLangFromHeaders, useI18n } from "@/i18n/utils";
+import { useI18n } from "@/i18n/utils";
+import "@/styles/global.css";
 
-const locale = getLangFromHeaders(Astro.request.headers);
-const { t } = useI18n(locale);
+const { t, lang } = useI18n(Astro.locals.lang);
 ---
 
 <!doctype html>
-<html lang={locale}>
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
   </head>

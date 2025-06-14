@@ -1,14 +1,12 @@
 {
   "extends": "astro/tsconfigs/strict",
+  "exclude": ["dist"],
   "compilerOptions": {
+    "types": ["./worker-configuration.d.ts", "node"],
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "~/*": [
-        "./*"
-      ]
+      "@/*": ["src/*"],
+      "~/*": ["./*"]
     }
   }
 }

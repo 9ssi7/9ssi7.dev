@@ -12,7 +12,13 @@ import {
 
 export function getLangFromUrl(url: URL) {
   const [, lang] = url.pathname.split("/");
-  if (lang in ui) return lang as Locale;
+  if (Object.keys(ui).includes(lang)) return lang as Locale;
+  return defaultLang;
+}
+
+export function getLangFromPath(path: string) {
+  const [, lang] = path.split("/");
+  if (Object.keys(ui).includes(lang)) return lang as Locale;
   return defaultLang;
 }
 
@@ -65,8 +71,10 @@ export function useTranslatedPath(lang: Locale) {
   };
 }
 
-export function useI18n(lang: Locale) {
+export function useI18n(initLang: Locale) {
+  const lang = Object.keys(ui).includes(initLang) ? initLang : defaultLang;
   return {
+    lang,
     t: useTranslations(lang),
     p: useTranslatedPath(lang),
     d: (date: string, opts?: Intl.DateTimeFormatOptions): string => {

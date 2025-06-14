@@ -1,8 +1,7 @@
-import { type AstroComponent } from "@lucide/astro";
-import { Github, Invision } from "simple-icons-astro";
+import type { IconName } from "@/components/Icon.astro";
 
 type Item = {
-  icon: AstroComponent;
+  icon: IconName;
   url: string;
   appName: string;
   param: string;
@@ -10,13 +9,13 @@ type Item = {
 
 const ProfileItems: Item[] = [
   {
-    icon: Github,
+    icon: "github",
     url: "https://github.com/9ssi7",
     appName: "GitHub",
     param: "/ 9ssi7",
   },
   {
-    icon: Invision,
+    icon: "linkedin",
     url: "https://www.linkedin.com/in/9ssi7/",
     appName: "LinkedIn",
     param: "/ 9ssi7",
