@@ -39,6 +39,19 @@ export const en = {
   header_projects: "Projects",
   header_work: "Work",
   header_blog: "Blog",
+
+  medium_articles: "Medium Articles",
+  medium_articles_desc: "Latest articles and thoughts shared on Medium",
+  medium_view_all: "View all articles",
+  medium_no_articles: "No articles found",
+
+  spotify_podcasts: "Podcasts",
+  spotify_podcasts_desc: "Featured podcasts and shows",
+  spotify_episodes: "episodes",
+  spotify_latest_episodes: "Latest Episodes",
+  spotify_listen: "Listen on Spotify",
+  spotify_no_podcasts: "No podcasts found",
+  spotify_no_podcasts_desc: "Make sure Spotify credentials are configured in environment variables",
 };
 
 export const tr = {
@@ -81,6 +94,19 @@ export const tr = {
   header_projects: "Projeler",
   header_work: "Deneyim",
   header_blog: "Blog",
+
+  medium_articles: "Medium Yazıları",
+  medium_articles_desc: "Medium'da paylaşılan son yazılar ve düşünceler",
+  medium_view_all: "Tüm yazıları görüntüle",
+  medium_no_articles: "Hiç yazı bulunamadı",
+
+  spotify_podcasts: "Podcast'ler",
+  spotify_podcasts_desc: "Öne çıkan podcast'ler ve programlar",
+  spotify_episodes: "bölüm",
+  spotify_latest_episodes: "Son Bölümler",
+  spotify_listen: "Spotify'da Dinle",
+  spotify_no_podcasts: "Hiç podcast bulunamadı",
+  spotify_no_podcasts_desc: "Ortam değişkenlerinde Spotify kimlik bilgilerinin yapılandırıldığından emin olun",
 };
 
 export type TranslationKeys = keyof typeof en;

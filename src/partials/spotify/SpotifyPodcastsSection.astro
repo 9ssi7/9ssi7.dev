@@ -1,0 +1,122 @@
+---
+import { fetchUserPodcasts, formatDuration, type SpotifyShow, type SpotifyEpisode } from "@/lib/spotify";
+import { useI18n } from "@/i18n/utils";
+
+const { t, d } = useI18n(Astro.locals.lang);
+const podcasts = await fetchUserPodcasts();
+---
+
+<section class="animate-fade-in">
+  <h2 class="font-medium text-gray-800 dark:text-neutral-200">{t("spotify_podcasts")}</h2>
+  <p class="mb-2 text-sm text-gray-600 dark:text-gray-400">{t("spotify_podcasts_desc")}</p>
+  <div class="space-y-6">
+    {podcasts.map((show: SpotifyShow) => (
+      <div class="overflow-hidden rounded-lg border bg-white dark:bg-zinc-900">
+        <div class="flex gap-4 p-4">
+          <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100 dark:bg-zinc-600">
+            {show.images[0] ? (
+              <img
+                src={show.images[0].url}
+                alt={show.name}
+                class="h-full w-full object-cover"
+                loading="lazy"
+              />
+            ) : (
+              <div class="flex h-full w-full items-center justify-center">
+                <svg class="h-12 w-12 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                </svg>
+              </div>
+            )}
+          </div>
+          <div class="flex-1">
+            <a
+              href={show.external_urls.spotify}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group inline-flex items-center gap-2"
+            >
+              <h3 class="font-semibold text-gray-900 transition-colors group-hover:text-gray-700 dark:text-gray-100 dark:group-hover:text-gray-300">
+                {show.name}
+              </h3>
+              <svg class="h-4 w-4 text-gray-400 transition-colors group-hover:text-gray-600 dark:group-hover:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+            <p class="mb-1 text-sm text-gray-600 dark:text-gray-400">
+              {show.publisher} · {show.total_episodes} {t("spotify_episodes")}
+            </p>
+            {show.description && (
+              <p class="line-clamp-2 text-sm text-gray-600 dark:text-gray-400">
+                {show.description}
+              </p>
+            )}
+          </div>
+        </div>
+        
+        {show.episodes && show.episodes.length > 0 && (
+          <div class="border-t">
+            <h4 class="px-4 pt-3 pb-2 text-sm font-medium text-gray-700 dark:text-gray-300">{t("spotify_latest_episodes")}</h4>
+            <div class="space-y-2 px-4 pb-4">
+              {show.episodes.map((episode: SpotifyEpisode) => (
+                <a
+                  href={episode.external_urls.spotify}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group block rounded-lg bg-gray-50 p-3 transition-colors hover:bg-gray-100 dark:bg-zinc-800 dark:hover:bg-zinc-700"
+                >
+                  <div class="flex items-start justify-between gap-3">
+                    <div class="flex-1">
+                      <h5 class="mb-1 line-clamp-1 text-sm font-medium text-gray-900 transition-colors group-hover:text-gray-700 dark:text-gray-100 dark:group-hover:text-gray-300">
+                        {episode.name}
+                      </h5>
+                      <p class="line-clamp-2 text-xs text-gray-600 dark:text-gray-400">
+                        {episode.description}
+                      </p>
+                      <div class="mt-2 flex items-center gap-3 text-xs text-gray-500 dark:text-gray-500">
+                        <time>{d(episode.release_date, { year: "numeric", month: "short", day: "numeric" })}</time>
+                        <span>·</span>
+                        <span>{formatDuration(episode.duration_ms)}</span>
+                      </div>
+                    </div>
+                    <svg class="h-4 w-4 flex-shrink-0 text-gray-400 transition-colors group-hover:text-gray-600 dark:group-hover:text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+  
+  {podcasts.length > 0 && (
+    <div class="mt-6 text-center">
+      <a
+        href={podcasts[0].external_urls.spotify}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded-lg bg-[#1DB954] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#1aa34a]"
+      >
+        {t("spotify_listen")}
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+  )}
+  
+  {podcasts.length === 0 && (
+    <div class="rounded-lg bg-gray-50 p-8 text-center dark:bg-gray-800">
+      <svg class="mx-auto mb-4 h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+      </svg>
+      <p class="text-gray-600 dark:text-gray-400">{t("spotify_no_podcasts")}</p>
+      <p class="mt-2 text-sm text-gray-500 dark:text-gray-500">
+        {t("spotify_no_podcasts_desc")}
+      </p>
+    </div>
+  )}
+</section>
