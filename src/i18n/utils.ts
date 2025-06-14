@@ -10,13 +10,15 @@ import {
   type RouteKey,
 } from "./ui";
 
-export function getLangFromUrl(url: URL) {
+export function getLangFromUrl(url?: URL) {
+  if (!url) return defaultLang;
   const [, lang] = url.pathname.split("/");
   if (Object.keys(ui).includes(lang)) return lang as Locale;
   return defaultLang;
 }
 
-export function getLangFromPath(path: string) {
+export function getLangFromPath(path?: string) {
+  if (!path) return defaultLang;
   const [, lang] = path.split("/");
   if (Object.keys(ui).includes(lang)) return lang as Locale;
   return defaultLang;

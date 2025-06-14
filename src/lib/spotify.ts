@@ -134,8 +134,8 @@ export async function fetchSpotifyShows(showIds: string[]): Promise<SpotifyShow[
 }
 
 export async function fetchUserPodcasts(): Promise<SpotifyShow[]> {
-  const podcastIds = import.meta.env.SPOTIFY_PODCAST_IDS;
-  const showIds = podcastIds.split(',').map((id: string) => id.trim());
+  const podcastIds = import.meta.env.SPOTIFY_PODCAST_IDS || ""
+  const showIds = podcastIds?.split(',').map((id: string) => id.trim());
   return fetchSpotifyShows(showIds);
 }
 
